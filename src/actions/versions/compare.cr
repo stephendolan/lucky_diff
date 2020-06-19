@@ -5,9 +5,10 @@ class Versions::Compare < BrowserAction
 
     if valid_directory?(directory: from_dir) && valid_directory?(directory: to_dir)
       tempfile = File.tempname("diff_output", ".diff")
-      variable = system "diff -ur #{from_dir} #{to_dir} > #{tempfile}"
+      variable = system "diff #{ignore_flags} -ur #{from_dir} #{to_dir} > #{tempfile}"
       diff = File.read(tempfile)
 
+      # plain_text "#{ignore_flags}"
       html Versions::ComparePage, diff: diff
     else
       redirect Home::Index
@@ -20,5 +21,14 @@ class Versions::Compare < BrowserAction
 
   private def valid_directory?(directory)
     File.directory? directory
+  end
+
+  private def ignore_flags
+    ignored_patterns = [
+      "settings.secret_key_base",
+    ]
+
+    ignored_patterns.map! { |pattern| "-I #{pattern}" }
+    ignored_patterns.join(" ")
   end
 end
