@@ -6,7 +6,6 @@ export default class extends Controller {
   connect() {
     const diffJson = Diff2Html.parse(this.unifiedDiff);
     const diffHtml = Diff2Html.html(diffJson, { drawFileList: true });
-    console.log(diffHtml);
     this.element.innerHTML = diffHtml;
   }
 

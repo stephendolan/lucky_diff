@@ -1,5 +1,6 @@
 class Version
   SUPPORTED_VERSIONS = [
+    "0.20.0",
     "0.21.0",
     "0.22.0",
   ]

@@ -1,0 +1,31 @@
+name: my_app
+version: 0.1.0
+
+authors:
+  - Stephen Dolan <dolan.stephen1@gmail.com>
+
+targets:
+  my_app:
+    main: src/my_app.cr
+
+crystal: 0.34.0
+
+dependencies:
+  lucky:
+    github: luckyframework/lucky
+    version: ~> 0.20.0
+  authentic:
+    github: luckyframework/authentic
+    version: ~> 0.5.1
+  carbon:
+    github: luckyframework/carbon
+    version: ~> 0.1.1
+  dotenv:
+    github: gdotdesign/cr-dotenv
+    version: ~> 0.7.0
+  lucky_flow:
+    github: luckyframework/lucky_flow
+    version: ~> 0.6.2
+  jwt:
+    github: crystal-community/jwt
+    version: ~> 1.4.0

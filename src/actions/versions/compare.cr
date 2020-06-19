@@ -1,19 +1,24 @@
 class Versions::Compare < BrowserAction
-  get "/compare/:from_version/:to_version" do
-    if Version.valid?(from_version) && Version.valid?(to_version)
-      from_dir = version_directory(version: from_version)
-      to_dir = version_directory(version: to_version)
+  param from : String = Version::DEFAULT_FROM
+  param to : String = Version::DEFAULT_TO
+
+  get "/compare" do
+    if Version.valid?(from) && Version.valid?(to)
+      from_dir = version_directory(version: from)
+      to_dir = version_directory(version: to)
 
       if valid_directory?(directory: from_dir) && valid_directory?(directory: to_dir)
         tempfile = File.tempname("diff_output", ".diff")
         variable = system "diff #{ignore_flags} -ur #{from_dir} #{to_dir} > #{tempfile}"
         diff = File.read(tempfile)
 
-        html Versions::ComparePage, diff: diff, from: from_version, to: to_version
+        html Versions::ComparePage, diff: diff, from: from, to: to
       else
+        flash.failure = "Couldn't find apps with versions #{from} and #{to} to compare"
         redirect Home::Index
       end
     else
+      flash.failure = "Invalid version numbers provided"
       redirect Home::Index
     end
   end
