@@ -19,8 +19,11 @@ abstract class MainLayout
       mount Shared::LayoutHead.new(page_title: page_title, context: context)
 
       body do
+        mount Shared::Navbar.new
         mount Shared::FlashMessages.new(context.flash)
-        content
+        div class: "p-10" do
+          content
+        end
       end
     end
   end
