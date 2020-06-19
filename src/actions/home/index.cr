@@ -1,5 +1,5 @@
 class Home::Index < BrowserAction
   get "/" do
-    redirect Versions::Compare.with(LuckyVersion::DEFAULT_PREVIOUS, LuckyVersion::DEFAULT_LATEST)
+    redirect Versions::Compare.with(Version::DEFAULT_FROM, Version::DEFAULT_TO)
   end
 end

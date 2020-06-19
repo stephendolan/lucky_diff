@@ -1,15 +1,18 @@
 class Versions::Compare < BrowserAction
   get "/compare/:from_version/:to_version" do
-    from_dir = version_directory(version: from_version)
-    to_dir = version_directory(version: to_version)
+    if Version.valid?(from_version) && Version.valid?(to_version)
+      from_dir = version_directory(version: from_version)
+      to_dir = version_directory(version: to_version)
 
-    if valid_directory?(directory: from_dir) && valid_directory?(directory: to_dir)
-      tempfile = File.tempname("diff_output", ".diff")
-      variable = system "diff #{ignore_flags} -ur #{from_dir} #{to_dir} > #{tempfile}"
-      diff = File.read(tempfile)
+      if valid_directory?(directory: from_dir) && valid_directory?(directory: to_dir)
+        tempfile = File.tempname("diff_output", ".diff")
+        variable = system "diff #{ignore_flags} -ur #{from_dir} #{to_dir} > #{tempfile}"
+        diff = File.read(tempfile)
 
-      # plain_text "#{ignore_flags}"
-      html Versions::ComparePage, diff: diff
+        html Versions::ComparePage, diff: diff
+      else
+        redirect Home::Index
+      end
     else
       redirect Home::Index
     end
