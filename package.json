@@ -4,6 +4,7 @@
   "dependencies": {
     "@babel/compat-data": "^7.9.0",
     "@rails/ujs": "^6.0.0",
+    "stimulus": "^1.1.1",
     "tailwindcss": "^1.4.6",
     "turbolinks": "^5.2.0"
   },
@@ -14,6 +15,7 @@
     "prod": "NODE_ENV=production yarn run webpack --progress --hide-modules --color --config=node_modules/laravel-mix/setup/webpack.config.js"
   },
   "devDependencies": {
+    "@babel/plugin-proposal-class-properties": "^7.10.1",
     "browser-sync": "^2.26.7",
     "compression-webpack-plugin": "^3.0.0",
     "laravel-mix": "^4.0.0",

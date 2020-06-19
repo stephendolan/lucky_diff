@@ -7,8 +7,9 @@ require("@rails/ujs").start();
 // Turbolinks is optional. Learn more: https://github.com/turbolinks/turbolinks/
 require("turbolinks").start();
 
-// If using Turbolinks, you can attach events to page load like this:
-//
-// document.addEventListener("turbolinks:load", function() {
-//   ...
-// })
+import { Application } from "stimulus";
+import { definitionsFromContext } from "stimulus/webpack-helpers";
+
+const application = Application.start();
+const context = require.context("./controllers", true, /\.js$/);
+application.load(definitionsFromContext(context));

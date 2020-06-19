@@ -1,12 +1,24 @@
 class Versions::Compare < BrowserAction
-  get "/:from_version/:to_version" do
-    from_version_exists = File.directory? "../../../generated/#{from_version}"
-    to_version_exists = File.directory? "../../../generated/#{to_version}"
+  get "/compare/:from_version/:to_version" do
+    from_dir = version_directory(version: from_version)
+    to_dir = version_directory(version: to_version)
 
-    if from_version_exists && to_version_exists
-      plain_text "Render something in Versions::Compare"
+    if valid_directory?(directory: from_dir) && valid_directory?(directory: to_dir)
+      tempfile = File.tempname("diff_output", ".diff")
+      variable = system "diff -ur #{from_dir} #{to_dir} > #{tempfile}"
+      diff = File.read(tempfile)
+
+      html Versions::ComparePage, diff: diff
     else
-      plain_text "Unsupported versions provided"
+      redirect Home::Index
     end
+  end
+
+  private def version_directory(version)
+    Dir.current + "/generated/" + version
+  end
+
+  private def valid_directory?(directory)
+    File.directory? directory
   end
 end
