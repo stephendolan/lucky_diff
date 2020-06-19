@@ -9,7 +9,7 @@ class Versions::Compare < BrowserAction
         variable = system "diff #{ignore_flags} -ur #{from_dir} #{to_dir} > #{tempfile}"
         diff = File.read(tempfile)
 
-        html Versions::ComparePage, diff: diff
+        html Versions::ComparePage, diff: diff, from: from_version, to: to_version
       else
         redirect Home::Index
       end
