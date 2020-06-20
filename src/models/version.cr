@@ -5,10 +5,15 @@ class Version
     "0.22.0",
   ]
 
-  DEFAULT_FROM = SUPPORTED_VERSIONS.last(2).first
-  DEFAULT_TO   = SUPPORTED_VERSIONS.last
-
   def self.valid?(version)
     SUPPORTED_VERSIONS.includes? version
+  end
+
+  def self.default_from
+    SUPPORTED_VERSIONS[-2]
+  end
+
+  def self.default_to
+    SUPPORTED_VERSIONS[-1]
   end
 end

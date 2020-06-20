@@ -1,34 +1,22 @@
 class Home::Index < BrowserAction
-  param from : String = Version::DEFAULT_FROM
-  param to : String = Version::DEFAULT_TO
+  param from : String = Version.default_from
+  param to : String = Version.default_to
 
   get "/" do
     if Version.valid?(from) && Version.valid?(to)
-      from_dir = version_directory(version: from)
-      to_dir = version_directory(version: to)
+      tempfile = File.tempname("diff_output", ".diff")
+      variable = system "diff #{ignore_flags} --speed-large-files -ur #{full_path(from)} #{full_path(to)} > #{tempfile}"
+      diff = File.read(tempfile)
 
-      if valid_directory?(directory: from_dir) && valid_directory?(directory: to_dir)
-        tempfile = File.tempname("diff_output", ".diff")
-        variable = system "diff #{ignore_flags} -ur #{from_dir} #{to_dir} > #{tempfile}"
-        diff = File.read(tempfile)
-
-        html Versions::ComparePage, diff: diff, from: from, to: to
-      else
-        flash.failure = "Couldn't find apps with versions #{from} and #{to} to compare"
-        redirect Home::Index
-      end
+      html Versions::ComparePage, diff: diff, from: from, to: to
     else
-      flash.failure = "Invalid version numbers provided"
-      redirect Home::Index
+      flash.failure = "Whoops! Looks like those versions aren't supported (yet)!"
+      redirect Home::Index.with(from: Version.default_from, to: Version.default_to)
     end
   end
 
-  private def version_directory(version)
+  private def full_path(version)
     Dir.current + "/generated/" + version
-  end
-
-  private def valid_directory?(directory)
-    File.directory? directory
   end
 
   private def ignore_flags
