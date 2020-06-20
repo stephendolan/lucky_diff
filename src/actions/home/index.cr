@@ -7,6 +7,7 @@ class Home::Index < BrowserAction
       tempfile = File.tempname("diff_output", ".diff")
       variable = system "diff #{ignore_flags} --speed-large-files -ur #{full_path(from)} #{full_path(to)} > #{tempfile}"
       diff = File.read(tempfile)
+      File.delete(tempfile)
 
       html Versions::ComparePage, diff: diff, from: from, to: to
     else
