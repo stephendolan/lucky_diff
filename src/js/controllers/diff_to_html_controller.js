@@ -5,7 +5,7 @@ import "diff2html/bundles/css/diff2html.min.css";
 export default class extends Controller {
   connect() {
     const diffJson = Diff2Html.parse(this.unifiedDiff);
-    const diffHtml = Diff2Html.html(diffJson, { drawFileList: true });
+    const diffHtml = Diff2Html.html(diffJson, { drawFileList: false });
     this.element.innerHTML = diffHtml;
   }
 
