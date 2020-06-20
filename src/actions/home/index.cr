@@ -4,12 +4,7 @@ class Home::Index < BrowserAction
 
   get "/" do
     if Version.valid?(from) && Version.valid?(to)
-      tempfile = File.tempname("diff_output", ".diff")
-      variable = system "diff #{ignore_flags} --speed-large-files -ur #{full_path(from)} #{full_path(to)} > #{tempfile}"
-      diff = File.read(tempfile)
-      File.delete(tempfile)
-
-      html Versions::ComparePage, diff: diff, from: from, to: to
+      html Versions::ComparePage, diff: version_diff, from: from, to: to
     else
       flash.failure = "Whoops! Looks like those versions aren't supported (yet)!"
       redirect Home::Index.with(from: Version.default_from, to: Version.default_to)
@@ -18,6 +13,14 @@ class Home::Index < BrowserAction
 
   private def full_path(version)
     Dir.current + "/generated/" + version
+  end
+
+  private def version_diff
+    tempfile = File.tempname("diff_output", ".diff")
+    variable = system "diff #{ignore_flags} --speed-large-files -ur #{full_path(from)} #{full_path(to)} > #{tempfile}"
+    File.read(tempfile)
+  ensure
+    File.delete(tempfile) if tempfile
   end
 
   private def ignore_flags
