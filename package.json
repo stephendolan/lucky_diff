@@ -2,7 +2,7 @@
   "license": "UNLICENSED",
   "private": true,
   "dependencies": {
-    "@babel/compat-data": "^7.9.0",
+    "@babel/compat-data": "^7.10.3",
     "@rails/ujs": "^6.0.0",
     "diff2html": "^3.1.8",
     "stimulus": "^1.1.1",
