@@ -1,4 +1,4 @@
-# my_app_19
+# my_app
 
 This is a project written using [Lucky](https://luckyframework.org). Enjoy!
 

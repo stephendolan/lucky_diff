@@ -1,4 +1,4 @@
-database_name = "my_app_19_#{Lucky::Env.name}"
+database_name = "my_app_#{Lucky::Env.name}"
 
 AppDatabase.configure do |settings|
   if Lucky::Env.production?
@@ -21,7 +21,7 @@ Avram.configure do |settings|
   # In production, allow lazy loading (N+1).
   # In development and test, raise an error if you forget to preload associations
   settings.lazy_load_enabled = Lucky::Env.production?
-  
+
   # Uncomment the next line to log all SQL queries
   # settings.query_log_level = ::Logger::Severity::DEBUG
 end

@@ -1,12 +1,12 @@
-name: my_app_17
+name: my_app
 version: 0.1.0
 
 authors:
   - Stephen Dolan <dolan.stephen1@gmail.com>
 
 targets:
-  my_app_17:
-    main: src/my_app_17.cr
+  my_app:
+    main: src/my_app.cr
 
 crystal: 0.30.1
 
