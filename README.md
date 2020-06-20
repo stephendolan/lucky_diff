@@ -1,14 +1,11 @@
-# lucky_diff
+# LuckyDiff
 
-This is a project written using [Lucky](https://luckyframework.org). Enjoy!
+This project compares released versions of [Lucky](https://luckyframework.org) apps. It's heavily inspired by [RailsDiff](https://railsdiff.org). Enjoy!
 
-### Setting up the project
+## Is a version you need missing?
 
-1. [Install required dependencies](https://luckyframework.org/guides/getting-started/installing#install-required-dependencies)
-1. Update database settings in `config/database.cr`
-1. Run `script/setup`
-1. Run `lucky dev` to start the app
+Please reference the [Contributing Guide](CONTRIBUTING.MD)
 
-### Learning Lucky
+## Want to add something to the site?
 
-Lucky uses the [Crystal](https://crystal-lang.org) programming language. You can learn about Lucky from the [Lucky Guides](https://luckyframework.org/guides/getting-started/why-lucky).
+Please reference the [Contributing Guide](CONTRIBUTING.MD)
