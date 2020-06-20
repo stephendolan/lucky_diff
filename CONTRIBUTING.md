@@ -14,7 +14,7 @@
 
 ### Adding versions
 
-All supported versions are placed in the [generators](/generators/) folder, so adding a new version is as simple as following these steps:
+All supported versions are placed in the [generated](/generated/) folder, so adding a new version is as simple as following these steps:
 
 1. Scaffold a new app with the appropriate Lucky version and standard app name: `lucky init.custom my_app`
 1. Move the generated app to the `/generated/` folder, named after the version
