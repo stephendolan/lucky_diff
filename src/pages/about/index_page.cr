@@ -10,6 +10,7 @@ class About::IndexPage < MainLayout
       para do
         text "It was heavily inspired by "
         a "RailsDiff.org", class: link_class, href: "http://railsdiff.org", target: "_blank"
+        text "."
       end
 
       para do
