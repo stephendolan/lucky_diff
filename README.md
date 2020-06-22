@@ -1,6 +1,6 @@
 # LuckyDiff
 
-This project compares released versions of [Lucky](https://luckyframework.org) apps. It's heavily inspired by [RailsDiff](https://railsdiff.org). Enjoy!
+This project compares released versions of [Lucky](https://luckyframework.org) apps. It's heavily inspired by [RailsDiff](http://railsdiff.org). Enjoy!
 
 ## Is a version you need missing?
 
