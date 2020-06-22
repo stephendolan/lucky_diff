@@ -8,13 +8,13 @@ class About::IndexPage < MainLayout
       end
 
       para do
-        text "It was heavily inspired by "
+        text "It is heavily inspired by "
         a "RailsDiff.org", class: link_class, href: "http://railsdiff.org", target: "_blank"
         text "."
       end
 
       para do
-        text "This site is not owned or maintained by the "
+        text "It is not owned or maintained by the "
         a "Lucky", class: link_class, href: "https://github.com/luckyframework/lucky", target: "_blank"
         text " team."
       end
