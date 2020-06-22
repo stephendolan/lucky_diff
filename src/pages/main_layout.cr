@@ -21,7 +21,7 @@ abstract class MainLayout
       body do
         mount Shared::Navbar.new
         mount Shared::FlashMessages.new(context.flash)
-        div class: "p-10" do
+        div class: "mx-10 my-6" do
           content
         end
       end

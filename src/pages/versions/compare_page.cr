@@ -4,7 +4,7 @@ class Versions::ComparePage < MainLayout
   needs to : String
 
   def content
-    form(method: "GET", class: "pb-4 space-y-2 text-lg text-center", action: Home::Index.path) do
+    form(method: "GET", class: "pb-6 space-y-2 text-lg text-center", action: Home::Index.path) do
       version_picker(input_name: "from", selected_version: from)
       arrow_icon
       version_picker(input_name: "to", selected_version: to)
