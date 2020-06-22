@@ -15,7 +15,7 @@ class Versions::ComparePage < MainLayout
   end
 
   def version_picker(*, input_name, selected_version)
-    select_tag input_name: input_name, class: "border rounded pr-2" do
+    select_tag name: input_name, class: "border rounded pr-2" do
       Version::SUPPORTED_VERSIONS.each do |version|
         option version, attrs: [version == selected_version ? :selected : nil].compact
       end
