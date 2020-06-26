@@ -20,3 +20,10 @@ include LuckyFlow::Expectations
 Avram::Migrator::Runner.new.ensure_migrated!
 Avram::SchemaEnforcer.ensure_correct_column_mappings!
 Habitat.raise_if_missing_settings!
+
+# Added to ensure LuckyFlow has something to use by default
+class User
+  def id
+    0
+  end
+end
