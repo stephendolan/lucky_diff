@@ -11,7 +11,15 @@ class Versions::ComparePage < MainLayout
       compare_button
     end
 
-    div "Loading diff...", data_controller: "diff-to-html", data_diff_to_html_unified_diff: diff
+    if diff.empty?
+      div class: "pt-10 w-full font-semibold text-center" do
+        text "There's no difference between the versions you've selected."
+      end
+    else
+      div "Loading diff...",
+        data_controller: "diff-to-html",
+        data_diff_to_html_unified_diff: diff
+    end
   end
 
   def version_picker(*, input_name, selected_version)
