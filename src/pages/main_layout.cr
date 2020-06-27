@@ -18,12 +18,15 @@ abstract class MainLayout
     html lang: "en" do
       m Shared::LayoutHead, page_title: page_title, context: context
 
-      body do
+      body class: "flex flex-col min-h-screen" do
         m Shared::Navbar
         m Shared::FlashMessages, context.flash
-        div class: "mx-10 my-6" do
+
+        div class: "flex-grow mx-10 my-6" do
           content
         end
+
+        m Shared::Footer
       end
     end
   end

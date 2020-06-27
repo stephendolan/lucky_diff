@@ -1,15 +1,17 @@
-class Shared::Navbar < BaseComponent
+class Shared::Footer < BaseComponent
   def render
-    nav class: "w-full flex justify-between bg-gray-200 border-b px-6 py-4" do
-      link "LuckyDiff", to: logo_link, class: "my-auto font-semibold text-2xl #{link_color}"
-
-      div class: "flex space-x-8" do
-        link "About", to: About::Index, class: "my-auto font-semibold text-lg #{link_color}"
-
-        a href: github_link, target: "_blank", class: "h-8 w-8 #{link_color}" do
-          github_logo
+    nav class: "w-full flex items-center justify-between bg-gray-100 border-t p-2" do
+      div do
+        a href: "https://kindmetrics.io", target: "_blank", class: "text-xs font-semibold #{link_color}" do
+          text "Metrics by KindMetrics"
         end
       end
+
+      iframe src: "https://github.com/sponsors/stephendolan/button",
+        title: "Sponsor LuckyDiff",
+        height: 35,
+        width: 107,
+        class: "border-none"
     end
   end
 
