@@ -16,11 +16,11 @@ abstract class MainLayout
     html_doctype
 
     html lang: "en" do
-      mount Shared::LayoutHead.new(page_title: page_title, context: context)
+      m Shared::LayoutHead, page_title: page_title, context: context
 
       body do
-        mount Shared::Navbar.new
-        mount Shared::FlashMessages.new(context.flash)
+        m Shared::Navbar
+        m Shared::FlashMessages, context.flash
         div class: "mx-10 my-6" do
           content
         end
