@@ -3,6 +3,10 @@ class Versions::ComparePage < MainLayout
   needs from : String
   needs to : String
 
+  def page_title
+    "v#{from} to v#{to}"
+  end
+
   def content
     form(method: "GET", class: "pb-6 space-y-2 text-lg text-center", action: Home::Index.path) do
       version_picker(input_name: "from", selected_version: from)
