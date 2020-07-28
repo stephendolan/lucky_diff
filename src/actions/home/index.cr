@@ -17,7 +17,7 @@ class Home::Index < BrowserAction
 
   private def version_diff
     tempfile = File.tempname("diff_output", ".diff")
-    variable = system "diff #{ignore_flags} --speed-large-files -ur #{full_path(from)} #{full_path(to)} > #{tempfile}"
+    system "diff #{ignore_flags} --speed-large-files -ur #{full_path(from)} #{full_path(to)} > #{tempfile}"
     File.read(tempfile)
   ensure
     File.delete(tempfile) if tempfile

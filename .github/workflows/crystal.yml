@@ -57,5 +57,14 @@ jobs:
       - name: Run Lucky setup script
         run: ./script/setup
 
+      - name: Ameba lint
+        run: ./bin/ameba
+
+      - name: Crystal format check
+        run: crystal tool format --check
+
+      - name: Prettier check
+        run: yarn run prettier --check src/**/*.{js,ts}
+
       - name: Run tests
         run: crystal spec
