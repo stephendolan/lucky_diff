@@ -8,11 +8,17 @@ class Versions::ComparePage < MainLayout
   end
 
   def content
-    form(method: "GET", class: "pb-6 space-y-2 text-lg text-center", action: Home::Index.path) do
-      version_picker(input_name: "from", selected_version: from)
-      arrow_icon
-      version_picker(input_name: "to", selected_version: to)
-      compare_button
+    form_width = "w-full sm:w-1/2 md:w-1/3 lg:2-1/4"
+    form(method: "GET", class: "pb-6 space-y-2 text-center #{form_width} mx-auto", action: Home::Index.path) do
+      div class: "flex justify-center" do
+        version_picker(input_name: "from", selected_version: from)
+        arrow_icon
+        version_picker(input_name: "to", selected_version: to)
+      end
+
+      div class: "w-full" do
+        compare_button
+      end
     end
 
     if diff.empty?
@@ -27,7 +33,7 @@ class Versions::ComparePage < MainLayout
   end
 
   def version_picker(*, input_name, selected_version)
-    select_tag name: input_name, class: "border rounded mx-2 px-2" do
+    select_tag name: input_name, class: "border rounded flex-1" do
       Version::SUPPORTED_VERSIONS.each do |version|
         option version, attrs: [version == selected_version ? :selected : nil].compact
       end
@@ -41,8 +47,8 @@ class Versions::ComparePage < MainLayout
   end
 
   def compare_button
-    div do
-      submit("Compare", class: "w-40 border py-1 rounded border-teal-700 mt-2 cursor-pointer bg-teal-500 hover:bg-teal-600 text-white")
-    end
+    button_color = "bg-teal-500 hover:bg-teal-600"
+    submit "Compare",
+      class: "w-full py-1 mt-2 rounded shadow font-semibold cursor-pointer text-white #{button_color}"
   end
 end
