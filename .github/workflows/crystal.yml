@@ -31,6 +31,11 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+      
+      - name: Crystal Ameba Linter
+        uses: crystal-ameba/github-action@v0.2.5
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
@@ -62,9 +67,6 @@ jobs:
 
       - name: Run Lucky setup script
         run: ./script/setup
-
-      - name: Ameba lint
-        run: crystal bin/ameba.cr
 
       - name: Crystal format check
         run: crystal tool format --check
