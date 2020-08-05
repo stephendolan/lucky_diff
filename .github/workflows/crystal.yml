@@ -31,7 +31,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      
+
       - name: Crystal Ameba Linter
         uses: crystal-ameba/github-action@v0.2.5
         env:
@@ -59,20 +59,20 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-crystal-
 
+      - name: Crystal format check
+        run: crystal tool format --check
+
       - name: Install shards
         run: shards install
 
       - name: Install yarn packages
         run: yarn install
 
-      - name: Run Lucky setup script
-        run: ./script/setup
-
-      - name: Crystal format check
-        run: crystal tool format --check
-
       - name: Prettier check
         run: yarn run prettier --check src/**/*.{js,ts}
+
+      - name: Run Lucky setup script
+        run: ./script/setup
 
       - name: Run tests
         run: crystal spec
