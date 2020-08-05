@@ -51,8 +51,14 @@ jobs:
         with:
           path: lib
           key: ${{ runner.os }}-crystal-${{ hashFiles('**/shard.lock') }}
-          restore_keys: |
+          restore-keys: |
             ${{ runner.os }}-crystal-
+
+      - name: Install shards
+        run: shards install
+
+      - name: Install yarn packages
+        run: yarn install
 
       - name: Run Lucky setup script
         run: ./script/setup
