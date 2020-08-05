@@ -58,7 +58,7 @@ jobs:
         run: ./script/setup
 
       - name: Ameba lint
-        run: ./bin/ameba
+        run: crystal bin/ameba.cr
 
       - name: Crystal format check
         run: crystal tool format --check
