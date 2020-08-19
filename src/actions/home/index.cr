@@ -4,11 +4,17 @@ class Home::Index < BrowserAction
 
   get "/" do
     if Version.valid?(from) && Version.valid?(to)
-      html Versions::ComparePage, diff: version_diff, from: from, to: to
+      html Versions::ComparePage, diff: sanitize_diff(version_diff), from: from, to: to
     else
       flash.info = "You requested an unsupported version!"
       redirect Home::Index.with(from: Version.default_from, to: Version.default_to)
     end
+  end
+
+  # Because we store scaffolded apps in different directories, we remove
+  # those details to avoid every file getting the "Renamed" designation.
+  private def sanitize_diff(diff)
+    diff.gsub(/\S+\/generated\/(#{from}|#{to})/, "app")
   end
 
   private def full_path(version)
@@ -17,10 +23,14 @@ class Home::Index < BrowserAction
 
   private def version_diff
     tempfile = File.tempname("diff_output", ".diff")
-    system "diff #{ignore_flags} --speed-large-files -ur #{full_path(from)} #{full_path(to)} > #{tempfile}"
+    system "diff #{ignore_flags} -Nr -U #{context_lines} #{full_path(from)} #{full_path(to)} > #{tempfile}"
     File.read(tempfile)
   ensure
     File.delete(tempfile) if tempfile
+  end
+
+  private def context_lines
+    20
   end
 
   private def ignore_flags
