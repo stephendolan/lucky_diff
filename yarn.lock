@@ -2805,9 +2805,9 @@ dev-ip@^1.0.1:
   integrity sha1-p2o+0YVb56ASu4rBbLgPPADcKPA=
 
 diff2html@^3.1.8:
-  version "3.1.12"
-  resolved "https://registry.yarnpkg.com/diff2html/-/diff2html-3.1.12.tgz#47178e9277f2d2c797558a232f45d8fbdaa7bb92"
-  integrity sha512-iUFPcwhsb2e6ng7ct9VGntOomhCb5qRy1tuSCz2RpTk/3Y0fRjfySHEeL95rYvWqawfGrj/7OjPR/kGOTIT/9w==
+  version "3.1.13"
+  resolved "https://registry.yarnpkg.com/diff2html/-/diff2html-3.1.13.tgz#a50321c55847c9754c874d361cfc0ba2853feeec"
+  integrity sha512-Gs4NbtynANYqkPbbGqZN6zwWJq6JofAb5it76xnEUTpFjWJndaCCjFVUoD7yFjEPB36MtwTtT/ptWcKyD9Vw9g==
   dependencies:
     diff "4.0.2"
     hogan.js "3.0.2"
