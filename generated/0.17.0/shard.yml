@@ -2,7 +2,7 @@ name: my_app
 version: 0.1.0
 
 authors:
-  - Stephen Dolan <dolan.stephen1@gmail.com>
+  - your-name-here <your-email-here>
 
 targets:
   my_app:
