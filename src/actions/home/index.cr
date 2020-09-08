@@ -3,11 +3,11 @@ class Home::Index < BrowserAction
   param to : String = Version.default_to
 
   get "/" do
-    if Version.valid?(from) && Version.valid?(to)
+    if Version.valid?(params.get?(:from)) && Version.valid?(params.get?(:to))
       html Versions::ComparePage, diff: sanitize_diff(version_diff), from: from, to: to
     else
       flash.info = "You requested an unsupported version!"
-      redirect Home::Index.with(from: Version.default_from, to: Version.default_to)
+      redirect to: Home::Index.with(from, to)
     end
   end
 

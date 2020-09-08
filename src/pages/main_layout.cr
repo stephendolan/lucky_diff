@@ -16,17 +16,17 @@ abstract class MainLayout
     html_doctype
 
     html lang: "en" do
-      m Shared::LayoutHead, page_title: page_title, context: context
+      mount Shared::LayoutHead, page_title: page_title, context: context
 
       body class: "flex flex-col min-h-screen" do
-        m Shared::Navbar
-        m Shared::FlashMessages, context.flash
+        mount Shared::Navbar
+        mount Shared::FlashMessages, context.flash
 
         div class: "flex-grow mx-10 my-6" do
           content
         end
 
-        m Shared::Footer
+        mount Shared::Footer
       end
     end
   end
