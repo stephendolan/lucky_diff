@@ -7,7 +7,7 @@ RUN git clone https://github.com/luckyframework/lucky_cli \
   && shards install --production \
   && crystal build src/lucky.cr \
   && mv lucky /usr/local/bin
-RUN script/setup_prod
+RUN ./script/setup_prod
 RUN crystal build --release src/start_server.cr -o bin/lucky-diff
 
 FROM alpine
