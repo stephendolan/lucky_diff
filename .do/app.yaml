@@ -6,3 +6,7 @@ services:
     deploy_on_push: true
     repo: stephendolan/lucky_diff
   name: lucky-diff
+  envs:
+    - key: LUCKY_ENV
+      scope: RUN_TIME
+      value: production
