@@ -12,4 +12,4 @@ services:
       value: production
     - key: SKIP_LUCKY_TASK_PRECOMPILATION
       scope: BUILD_TIME
-      value: 1
+      value: skip
