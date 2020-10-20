@@ -7,7 +7,7 @@ set -o pipefail
 source script/helpers/text_helpers
 
 notice "Running System Check"
-./script/system_check
+./script/deploy/system_check
 print_done
 
 notice "Installing node dependencies"
