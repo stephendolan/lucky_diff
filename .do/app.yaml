@@ -1,6 +1,6 @@
 name: lucky-diff
 services:
-- dockerfile_path: dockerfiles/prod.Dockerfile
+- dockerfile_path: dockerfiles/prod_runner.Dockerfile
   github:
     branch: testing-do-deploy
     deploy_on_push: true
