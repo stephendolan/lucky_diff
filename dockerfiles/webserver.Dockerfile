@@ -1,16 +1,27 @@
-FROM stephendolan/lucky:latest as node_dependencies
+FROM node:alpine as node_dependencies
+WORKDIR /tmp
 COPY package.json yarn.lock /tmp/
-RUN cd /tmp && yarn install --no-progress
+RUN  yarn install --no-progress
 
-FROM stephendolan/lucky:latest as crystal_dependencies
+FROM crystallang/crystal:0.35.1-alpine as crystal_dependencies
+ENV SKIP_LUCKY_TASK_PRECOMPILATION="1"
+WORKDIR /tmp
 COPY shard.yml shard.lock /tmp/
-RUN cd /tmp && shards install --production
+RUN  shards install --production
+
+FROM node:alpine as webpack_build
+WORKDIR /tmp
+COPY . .
+RUN yarn prod
 
 FROM stephendolan/lucky:latest
 WORKDIR /app
 COPY . .
 COPY --from=node_dependencies /tmp/node_modules ./node_modules
 COPY --from=crystal_dependencies /tmp/lib ./lib
+COPY --from=webpack_build /tmp/public/css/* public/css
+COPY --from=webpack_build /tmp/public/js/* public/js
+COPY --from=webpack_build /tmp/public/mix-manifest.json public/
 RUN yarn prod
 RUN crystal build --release src/start_server.cr
 CMD ["src/start_server"]
