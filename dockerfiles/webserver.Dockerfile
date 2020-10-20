@@ -14,6 +14,7 @@ FROM node:slim as webpack_build
 ENV NODE_ENV=production
 WORKDIR /tmp_webpack
 COPY . .
+COPY --from=node_dependencies /tmp_node/node_modules node_modules
 RUN yarn prod
 
 FROM stephendolan/lucky:latest
