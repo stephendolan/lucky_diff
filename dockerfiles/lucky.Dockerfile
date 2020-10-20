@@ -14,7 +14,6 @@ RUN apt-get update \
   libnss3-dev \
   zlib1g-dev \
   postgresql-client \
-  chromium-chromedriver \
   curl \
   wget
 
