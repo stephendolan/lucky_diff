@@ -10,3 +10,6 @@ services:
     - key: LUCKY_ENV
       scope: RUN_TIME
       value: production
+    - key: SKIP_LUCKY_TASK_PRECOMPILATION
+      scope: BUILD_TIME
+      value: 1
