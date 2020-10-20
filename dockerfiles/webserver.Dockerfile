@@ -12,12 +12,12 @@ RUN  shards install --production
 FROM node:alpine as webpack_build
 WORKDIR /tmp
 COPY . .
+COPY --from=node_dependencies /tmp/node_modules ./node_modules
 RUN yarn prod
 
 FROM stephendolan/lucky:latest
 WORKDIR /app
 COPY . .
-COPY --from=node_dependencies /tmp/node_modules ./node_modules
 COPY --from=crystal_dependencies /tmp/lib ./lib
 COPY --from=webpack_build /tmp/public public
 RUN crystal build --release src/start_server.cr
