@@ -20,8 +20,8 @@ FROM stephendolan/lucky:latest
 ENV LUCKY_ENV=production
 WORKDIR /app
 COPY . .
-COPY --from=crystal_dependencies /tmp/lib lib
-COPY --from=node_dependencies /tmp/node_modules node_modules
-COPY --from=webpack_build /tmp/public public
+COPY --from=crystal_dependencies /tmp_crystal/lib lib
+COPY --from=node_dependencies /tmp_node/node_modules node_modules
+COPY --from=webpack_build /tmp_webpack/public public
 RUN crystal build --release src/start_server.cr
 CMD ["start_server"]
