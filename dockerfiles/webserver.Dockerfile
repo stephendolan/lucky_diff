@@ -7,7 +7,7 @@ RUN  shards install --production
 FROM node:slim as node_dependencies
 ENV NODE_ENV=production
 WORKDIR /tmp
-COPY package.json yarn.lock /tmp/
+COPY . .
 RUN yarn install --no-progress
 RUN yarn prod
 
