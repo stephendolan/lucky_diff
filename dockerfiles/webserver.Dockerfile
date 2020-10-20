@@ -27,5 +27,5 @@ RUN crystal build --static --release src/start_server.cr -o /usr/local/bin/lucky
 FROM alpine
 ENV LUCKY_ENV=production
 ENV NODE_ENV=production
-COPY --from=crystal_builder /usr/local/bin/lucky-diff /usr/local/bin/lucky-diff
+COPY --from=crystal_build /usr/local/bin/lucky-diff /usr/local/bin/lucky-diff
 CMD ["lucky-diff"]
