@@ -15,6 +15,9 @@ ENV NODE_ENV=production
 WORKDIR /tmp_webpack
 COPY . .
 COPY --from=node_dependencies /tmp_node/node_modules node_modules
+RUN ls -al
+RUN ls -al node_modules
+RUN ls -al node_modules/.bin
 RUN yarn prod
 
 FROM stephendolan/lucky:latest
