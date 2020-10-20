@@ -1,17 +1,16 @@
-FROM stephendolan/lucky:latest as builder
-
-ADD package.json /tmp/package.json
-ADD yarn.lock /tmp/yarn.lock
+FROM stephendolan/lucky:latest as node_dependencies
+COPY package.json yarn.lock /tmp/
 RUN cd /tmp && yarn install --no-progress
-RUN cp -a /tmp/node_modules /app/
 
-ADD shard.yml /tmp/shard.yml
-ADD shard.lock /tmp/shard.lock
+FROM stephendolan/lucky:latest as crystal_dependencies
+COPY shard.yml shard.lock /tmp/
 RUN cd /tmp && shards install --production
-RUN cp -a /tmp/lib /app/
 
+FROM stephendolan/lucky:latest
 WORKDIR /app
 COPY . .
+COPY --from=node_dependencies /tmp/node_modules ./node_modules
+COPY --from=crystal_dependencies /tmp/lib ./lib
 RUN yarn prod
 RUN crystal build --release src/start_server.cr
 CMD ["src/start_server"]
