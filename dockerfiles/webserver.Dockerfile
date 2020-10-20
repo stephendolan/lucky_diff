@@ -4,7 +4,7 @@ WORKDIR /tmp
 COPY shard.yml shard.lock /tmp/
 RUN  shards install --production
 
-FROM node:alpine as node_dependencies
+FROM node:slim as node_dependencies
 ENV NODE_ENV=production
 WORKDIR /tmp
 COPY package.json yarn.lock /tmp/
