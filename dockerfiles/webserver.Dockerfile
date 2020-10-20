@@ -21,4 +21,4 @@ COPY . .
 COPY --from=crystal_dependencies /tmp/lib ./lib
 COPY --from=webpack_build /tmp/public public
 RUN crystal build --release src/start_server.cr
-CMD ["src/start_server"]
+CMD ["start_server"]
