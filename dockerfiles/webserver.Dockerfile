@@ -1,7 +1,7 @@
 FROM crystallang/crystal:0.35.1-alpine as crystal_dependencies
 ENV SKIP_LUCKY_TASK_PRECOMPILATION="1"
 WORKDIR /tmp_crystal
-COPY shard.yml shard.lock /tmp/
+COPY shard.yml shard.lock .
 RUN  shards install --production
 
 FROM node:slim as node_dependencies
