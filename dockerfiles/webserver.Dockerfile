@@ -7,8 +7,13 @@ RUN  shards install --production
 FROM node:slim as node_dependencies
 ENV NODE_ENV=production
 WORKDIR /tmp
+COPY package.json .
+RUN yarn install
+
+FROM node:slim as webpack_build
+ENV NODE_ENV=production
+WORKDIR /tmp
 COPY . .
-RUN yarn install --no-progress
 RUN yarn prod
 
 FROM stephendolan/lucky:latest
@@ -17,6 +22,6 @@ WORKDIR /app
 COPY . .
 COPY --from=crystal_dependencies /tmp/lib lib
 COPY --from=node_dependencies /tmp/node_modules node_modules
-COPY --from=node_dependencies /tmp/public public
+COPY --from=webpack_build /tmp/public public
 RUN crystal build --release src/start_server.cr
 CMD ["start_server"]
