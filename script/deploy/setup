@@ -11,7 +11,7 @@ notice "Running System Check"
 print_done
 
 notice "Installing node dependencies"
-yarn install --production --no-progress | indent
+yarn install --no-progress | indent
 
 notice "Compiling assets"
 yarn prod | indent
