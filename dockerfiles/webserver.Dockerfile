@@ -16,7 +16,6 @@ WORKDIR /app
 COPY . .
 COPY --from=crystal_dependencies /tmp_crystal/lib lib
 COPY --from=node_dependencies /tmp_node/node_modules node_modules
-COPY --from=webpack_build /tmp_webpack/public public
 RUN yarn prod
 RUN crystal build --static --release src/start_server.cr -o /usr/local/bin/lucky-diff
 
