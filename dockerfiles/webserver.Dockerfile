@@ -1,18 +1,18 @@
 FROM crystallang/crystal:0.35.1-alpine as crystal_dependencies
 ENV SKIP_LUCKY_TASK_PRECOMPILATION="1"
-WORKDIR /tmp
+WORKDIR /tmp_crystal
 COPY shard.yml shard.lock /tmp/
 RUN  shards install --production
 
 FROM node:slim as node_dependencies
 ENV NODE_ENV=production
-WORKDIR /tmp
+WORKDIR /tmp_node
 COPY package.json .
 RUN yarn install
 
 FROM node:slim as webpack_build
 ENV NODE_ENV=production
-WORKDIR /tmp
+WORKDIR /tmp_webpack
 COPY . .
 RUN yarn prod
 
