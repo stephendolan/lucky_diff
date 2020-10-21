@@ -11,22 +11,21 @@ RUN yarn install
 
 FROM node:alpine as webpack_build
 ENV NODE_ENV=production
-WORKDIR /tmp_webpack_build
+WORKDIR /tmp_webpack
 COPY . .
 COPY --from=node_dependencies /tmp_node/node_modules node_modules
 RUN yarn prod
 
-FROM crystallang/crystal:0.35.1-alpine as crystal_build
+FROM crystallang/crystal:0.35.1-alpine as binary_build
 ENV LUCKY_ENV=production
-WORKDIR /tmp_crystal_build
+WORKDIR /tmp_binary_build
 COPY . .
 COPY --from=crystal_dependencies /tmp_crystal/lib lib
-COPY --from=node_dependencies /tmp_node/node_modules node_modules
 COPY --from=webpack_build /tmp_webpack/public public
 RUN crystal build --static --release src/start_server.cr -o /usr/local/bin/lucky-diff
 
 FROM alpine
 ENV LUCKY_ENV=production
 ENV NODE_ENV=production
-COPY --from=crystal_build /usr/local/bin/lucky-diff /usr/local/bin/lucky-diff
+COPY --from=binary_build /usr/local/bin/lucky-diff /usr/local/bin/lucky-diff
 CMD ["lucky-diff"]
