@@ -26,7 +26,6 @@ COPY . .
 COPY --from=crystal_dependencies /tmp_crystal/lib lib
 COPY --from=webpack_build /tmp_webpack/public public
 RUN crystal build --static --release src/start_server.cr -o /usr/local/bin/lucky-app
-RUN crystal run tasks.cr -- db.migrate
 
 FROM alpine
 ENV LUCKY_ENV=production
