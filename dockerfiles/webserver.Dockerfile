@@ -14,6 +14,7 @@ ENV NODE_ENV=production
 WORKDIR /tmp_webpack
 COPY package.json .
 COPY webpack.mix.js .
+COPY tsconfig.json .
 COPY src/js src/js
 COPY src/css src/css
 COPY public public
