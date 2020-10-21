@@ -47,6 +47,7 @@ mix
   // More info and options (like React support) here:
   // https://github.com/JeffreyWay/laravel-mix/blob/master/docs/mixjs.md
   .ts("src/js/app.ts", "public/js/app.js")
+  .sourceMaps()
   // Configure Babel options
   .babelConfig({
     plugins: ["@babel/plugin-proposal-class-properties"],
