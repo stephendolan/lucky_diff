@@ -35,7 +35,7 @@ class Home::Index < BrowserAction
 
   private def ignore_flags
     ignored_patterns = [
-      "settings.secret_key_base",
+      "\\s*settings.secret_key_base.*",
     ]
 
     ignored_patterns.map! { |pattern| "-I #{pattern}" }
