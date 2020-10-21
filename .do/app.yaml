@@ -1,8 +1,0 @@
-name: lucky-diff
-services:
-- dockerfile_path: dockerfiles/webserver.Dockerfile
-  github:
-    branch: testing-do-deploy
-    deploy_on_push: true
-    repo: stephendolan/lucky_diff
-  name: lucky-diff
