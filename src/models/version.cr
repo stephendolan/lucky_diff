@@ -11,7 +11,7 @@ class Version
   ]
 
   def self.valid?(version)
-    SUPPORTED_VERSIONS.includes? version
+    SUPPORTED_VERSIONS.includes?(version) && Dir.exists?(Dir.current + "/generated/" + version)
   end
 
   def self.default_from
