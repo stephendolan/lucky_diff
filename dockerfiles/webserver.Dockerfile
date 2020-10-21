@@ -13,6 +13,7 @@ FROM node:alpine as webpack_build
 ENV NODE_ENV=production
 WORKDIR /tmp_webpack
 COPY package.json .
+COPY webpack.mix.js .
 COPY src/js src/js
 COPY src/css src/css
 COPY public public
