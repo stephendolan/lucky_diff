@@ -6,7 +6,7 @@ RUN  shards install --production
 
 FROM node:alpine as node_dependencies
 WORKDIR /tmp_node
-COPY package.json .
+COPY package.json yarn.lock .
 RUN yarn install
 
 FROM node:alpine as webpack_build
