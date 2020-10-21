@@ -12,6 +12,7 @@ RUN yarn install
 FROM node:alpine as webpack_build
 ENV NODE_ENV=production
 WORKDIR /tmp_webpack
+COPY package.json .
 COPY src/js src/js
 COPY src/css src/css
 COPY public public
@@ -30,5 +31,6 @@ RUN crystal build --release src/start_server.cr -o /usr/local/bin/lucky-diff
 FROM alpine
 ENV LUCKY_ENV=production
 ENV NODE_ENV=production
-COPY --from=binary_build /usr/local/bin/lucky-diff /usr/local/bin/lucky-diff
-CMD ["lucky-diff"]
+WORKDIR /app
+COPY --from=binary_build /usr/local/bin/lucky-diff lucky-diff
+CMD ["./lucky-diff"]
