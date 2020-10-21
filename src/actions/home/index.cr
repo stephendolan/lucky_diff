@@ -6,7 +6,7 @@ class Home::Index < BrowserAction
     if Version.valid?(params.get?(:from)) && Version.valid?(params.get?(:to))
       html Versions::ComparePage, diff: sanitize_diff(version_diff), from: from, to: to
     else
-      flash.info = "You requested an unsupported version! Looking in directory: #{Dir.current}"
+      flash.info = "You requested an unsupported version!"
       redirect to: Home::Index.with(from, to)
     end
   end
