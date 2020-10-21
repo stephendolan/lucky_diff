@@ -10,6 +10,8 @@ class Versions::ComparePage < MainLayout
   def content
     p Dir.current
 
+    p diff
+
     form_width = "w-full sm:w-1/2 md:w-1/3 lg:2-1/4"
     form(method: "GET", class: "pb-6 space-y-2 text-center #{form_width} mx-auto", action: Home::Index.path) do
       div class: "flex justify-center" do
