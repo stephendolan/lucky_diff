@@ -16,6 +16,7 @@ COPY src/js src/js
 COPY src/css src/css
 COPY public public
 COPY --from=node_dependencies /tmp_node/node_modules node_modules
+RUN ls -al
 RUN yarn prod
 
 FROM crystallang/crystal:0.35.1-alpine as binary_build
