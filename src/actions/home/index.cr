@@ -23,7 +23,7 @@ class Home::Index < BrowserAction
 
   private def version_diff
     tempfile = File.tempname("diff_output", ".diff")
-    system "diff #{ignore_flags} -Nr -U #{context_lines} #{full_path(from)} #{full_path(to)} > #{tempfile}"
+    system "diff -Nr -U #{context_lines} #{full_path(from)} #{full_path(to)} > #{tempfile}"
     File.read(tempfile)
   ensure
     File.delete(tempfile) if tempfile
@@ -31,14 +31,5 @@ class Home::Index < BrowserAction
 
   private def context_lines
     20
-  end
-
-  private def ignore_flags
-    ignored_patterns = [
-      "settings.secret_key_base",
-    ]
-
-    ignored_patterns.map! { |pattern| "-I #{pattern}" }
-    ignored_patterns.join(" ")
   end
 end

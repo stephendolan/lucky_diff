@@ -13,7 +13,7 @@ elsif Lucky::Env.production?
   #
   # If you want logs like in develpoment use 'Lucky::PrettyLogFormatter.proc'.
   backend = Log::IOBackend.new
-  backend.formatter = Dexter::JSONLogFormatter.proc
+  backend.formatter = Dexter::PrettyLogFormatter.proc
   Log.dexter.configure(:info, backend)
 else
   # Use a pretty formatter printing to STDOUT in development
