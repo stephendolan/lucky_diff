@@ -35,7 +35,9 @@ jobs:
     - uses: actions/checkout@v2
 
     - name: Install Chromedriver
-      run: apt-get -yqq install chromium-chromedriver
+      run: |
+        apt-get update
+        apt-get -yqq install chromium-chromedriver
 
     - uses: actions/setup-node@v1
       with:
