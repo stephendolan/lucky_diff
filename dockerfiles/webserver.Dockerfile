@@ -21,7 +21,6 @@ RUN yarn prod
 
 FROM crystallang/crystal:0.35.1-alpine as binary_build
 ENV LUCKY_ENV=production
-ENV SECRET_KEY_BASE=secret-key-for-build
 WORKDIR /tmp_binary_build
 COPY . .
 COPY --from=crystal_dependencies /tmp_crystal/lib lib
