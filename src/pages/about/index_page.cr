@@ -1,6 +1,6 @@
 class About::IndexPage < MainLayout
   def content
-    h1 "Upgrades, made better.", class: "text-3xl font-bold text-center"
+    h1 "Upgrades, made better.", class: "text-3xl font-bold text-center", data_controller: "hello"
 
     div class: "text-xl space-y-10 lg:px-20 mt-10 text-center" do
       para do
