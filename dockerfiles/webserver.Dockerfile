@@ -24,7 +24,7 @@ COPY --from=crystal_dependencies /tmp_crystal/lib lib
 COPY --from=webpack_build /tmp_webpack/public public
 RUN crystal build --static --release src/start_server.cr -o /usr/local/bin/lucky-app
 
-FROM alpine
+FROM ubuntu
 ENV LUCKY_ENV=production
 ENV NODE_ENV=production
 WORKDIR /app
