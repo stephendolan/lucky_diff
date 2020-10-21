@@ -12,7 +12,9 @@ RUN yarn install
 FROM node:alpine as webpack_build
 ENV NODE_ENV=production
 WORKDIR /tmp_webpack
-COPY . .
+COPY src/js src/js
+COPY src/css src/css
+COPY public public
 COPY --from=node_dependencies /tmp_node/node_modules node_modules
 RUN yarn prod
 
