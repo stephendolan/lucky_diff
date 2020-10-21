@@ -1,5 +1,3 @@
-database_name = "lucky_diff_#{Lucky::Env.name}"
-
 AppDatabase.configure do |settings|
   settings.credentials = Avram::Credentials.void
 end
