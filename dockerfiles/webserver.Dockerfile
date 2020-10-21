@@ -13,6 +13,7 @@ FROM node:alpine as webpack_build
 ENV NODE_ENV=production
 WORKDIR /tmp_webpack_build
 COPY . .
+COPY --from=node_dependencies /tmp_node/node_modules node_modules
 RUN yarn prod
 
 FROM crystallang/crystal:0.35.1-alpine as crystal_build
