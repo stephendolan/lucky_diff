@@ -47,7 +47,6 @@ mix
   // More info and options (like React support) here:
   // https://github.com/JeffreyWay/laravel-mix/blob/master/docs/mixjs.md
   .ts("src/js/app.ts", "public/js/app.js")
-  .sourceMaps()
   // Configure Babel options
   .babelConfig({
     plugins: ["@babel/plugin-proposal-class-properties"],
@@ -77,6 +76,7 @@ mix
       ignored: /node_modules/,
     },
   })
+  .sourceMaps()
   // Disable default Mix notifications because we're using our own notifier
   .disableNotifications();
 
