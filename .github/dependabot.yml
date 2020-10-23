@@ -3,9 +3,13 @@ version: 2
 updates:
   - package-ecosystem: "github-actions"
     directory: "/"
+    schedule:
+      interval: "daily"
     target-branch: master
 
   - package-ecosystem: npm
     directory: "/"
+    schedule:
+      interval: "daily"
     target-branch: master
     versioning-strategy: increase
