@@ -14,7 +14,7 @@ let plugins = [];
 let WebpackNotifierPlugin = require("webpack-notifier");
 let webpackNotifier = new WebpackNotifierPlugin({
   alwaysNotify: false,
-  skipFirstNotification: true,
+  skipFirstNotification: true
 });
 plugins.push(webpackNotifier);
 
@@ -23,17 +23,17 @@ if (mix.inProduction()) {
   let CompressionWepackPlugin = require("compression-webpack-plugin");
   let gzipCompression = new CompressionWepackPlugin({
     compressionOptions: { level: 9 },
-    test: /\.js$|\.css$|\.html$|\.svg$/,
+    test: /\.js$|\.css$|\.html$|\.svg$/
   });
   plugins.push(gzipCompression);
 
   let brotliCompression = new CompressionWepackPlugin({
     compressionOptions: { level: 11 },
-    filename: '[path].br[query]',
-    algorithm: 'brotliCompress',
+    filename: "[path].br[query]",
+    algorithm: "brotliCompress",
     test: /\.js$|\.css$|\.html$|\.svg$/
-  })
-  plugins.push(brotliCompression)
+  });
+  plugins.push(brotliCompression);
 }
 
 const tailwindcss = require("tailwindcss");
@@ -46,10 +46,11 @@ mix
   .ts("src/js/app.ts", "public/js/app.js")
   // Configure Babel options
   .babelConfig({
-    plugins: ["@babel/plugin-proposal-class-properties"],
+    plugins: ["@babel/plugin-proposal-class-properties"]
   })
-  // SASS entry file. Uses autoprefixer automatically.
-  .sass("src/css/app.scss", "public/css")
+  .postCss("src/css/app.css", "public/css", [
+    tailwindcss("./src/css/tailwind.config.js")
+  ])
   // Customize postCSS:
   // https://github.com/JeffreyWay/laravel-mix/blob/master/docs/css-preprocessors.md#postcss-plugins
   .options({
@@ -58,8 +59,7 @@ mix
     imgLoaderOptions: { enabled: false },
     // Stops Mix from clearing the console when compilation succeeds
     clearConsole: false,
-    processCssUrls: false,
-    postCss: [tailwindcss("./src/css/tailwind.config.js")],
+    processCssUrls: false
   })
   // Set public path so manifest gets output here
   .setPublicPath("public")
@@ -70,8 +70,8 @@ mix
     stats: "errors-only",
     plugins: plugins,
     watchOptions: {
-      ignored: /node_modules/,
-    },
+      ignored: /node_modules/
+    }
   })
   .sourceMaps()
   // Disable default Mix notifications because we're using our own notifier
