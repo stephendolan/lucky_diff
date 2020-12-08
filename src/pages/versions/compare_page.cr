@@ -27,6 +27,7 @@ class Versions::ComparePage < MainLayout
       end
     else
       div "Loading diff...",
+        class: "text-center",
         data_controller: "diff-to-html",
         data_diff_to_html_unified_diff: diff
     end
