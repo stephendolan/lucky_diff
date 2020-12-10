@@ -11,7 +11,10 @@ class Shared::LayoutHead < BaseComponent
       css_link href: "https://cdn.jsdelivr.net/npm/diff2html/bundles/css/diff2html.min.css", data_turbolinks_track: "reload"
       css_link asset("css/app.css"), data_turbolinks_track: "reload"
       js_link asset("js/app.js"), data_turbolinks_track: "reload", attrs: [:defer]
-      js_link src: "https://static.cloudflareinsights.com/beacon.min.js", data_cf_beacon: "{'token': '9e300d57b1e34630ad3fc10c3f8be326'}", attrs: [:defer]
+
+      if Lucky::Env.production?
+        js_link src: "https://static.cloudflareinsights.com/beacon.min.js", data_cf_beacon: "{'token': '9e300d57b1e34630ad3fc10c3f8be326'}", attrs: [:defer]
+      end
 
       meta name: "turbolinks-cache-control", content: "no-cache"
       meta name: "description", content: site_description
