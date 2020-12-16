@@ -8,6 +8,7 @@ class Version
     "0.22.0",
     "0.23.0",
     "0.24.0",
+    "0.25.0",
   ]
 
   def self.valid?(version)
@@ -17,10 +18,10 @@ class Version
   end
 
   def self.default_from
-    SUPPORTED_VERSIONS[-2]
+    SUPPORTED_VERSIONS[-3]
   end
 
   def self.default_to
-    SUPPORTED_VERSIONS[-1]
+    SUPPORTED_VERSIONS[-2]
   end
 end
