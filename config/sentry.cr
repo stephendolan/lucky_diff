@@ -2,7 +2,7 @@ Raven.configure do |config|
   config.async = true
   config.current_environment = Lucky::Env.name
   config.environments = %w(production)
-  
+
   if Lucky::Env.production?
     config.dsn = sentry_dsn_from_env
   end
