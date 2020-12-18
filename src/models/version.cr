@@ -18,10 +18,10 @@ class Version
   end
 
   def self.default_from
-    SUPPORTED_VERSIONS[-3]
+    SUPPORTED_VERSIONS[-2]
   end
 
   def self.default_to
-    SUPPORTED_VERSIONS[-2]
+    SUPPORTED_VERSIONS[-1]
   end
 end
