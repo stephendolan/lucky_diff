@@ -31,11 +31,13 @@ if (mix.inProduction()) {
 const tailwindcss = require("tailwindcss");
 
 mix
+  // Set public path so manifest gets output here
+  .setPublicPath("public")
   // JS entry file. Supports Vue, and uses Babel
   //
   // More info and options (like React support) here:
   // https://github.com/JeffreyWay/laravel-mix/blob/master/docs/mixjs.md
-  .ts("src/js/app.ts", "public/js/app.js")
+  .ts("src/js/app.ts", "js/app.js")
   // Configure Babel options
   .babelConfig({
     plugins: ["@babel/plugin-proposal-class-properties"],
@@ -53,8 +55,6 @@ mix
     clearConsole: false,
     processCssUrls: false,
   })
-  // Set public path so manifest gets output here
-  .setPublicPath("public")
   // Add assets to the manifest
   .version(["public/assets"])
   // Reduce noise in Webpack output
