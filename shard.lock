@@ -1,5 +1,9 @@
 version: 2.0
 shards:
+  any_hash:
+    git: https://github.com/Sija/any_hash.cr.git
+    version: 0.2.3
+
   authentic:
     git: https://github.com/luckyframework/authentic.git
     version: 0.7.0
@@ -71,6 +75,10 @@ shards:
   pulsar:
     git: https://github.com/luckyframework/pulsar.git
     version: 0.2.1
+
+  raven:
+    git: https://github.com/Sija/raven.cr.git
+    version: 1.8.1
 
   selenium:
     git: https://github.com/matthewmcgarvey/selenium.cr.git

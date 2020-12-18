@@ -7,6 +7,7 @@ class AppServer < Lucky::BaseAppServer
       Lucky::HttpMethodOverrideHandler.new,
       Lucky::LogHandler.new,
       Lucky::ErrorHandler.new(action: Errors::Show),
+      Raven::Lucky::ErrorHandler.new,
       Lucky::RemoteIpHandler.new,
       Lucky::RouteHandler.new,
       Lucky::StaticCompressionHandler.new("./public", file_ext: "gz", content_encoding: "gzip"),
