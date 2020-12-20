@@ -8,17 +8,17 @@ targets:
   lucky_diff:
     main: src/lucky_diff.cr
 
-crystal: 0.35.0
+crystal: 0.35.1
 
 dependencies:
   raven:
     github: "Sija/raven.cr"
   lucky:
     github: luckyframework/lucky
-    version: ~> 0.24.0
+    version: ~> 0.25.0
   authentic:
     github: luckyframework/authentic
-    version: ~> 0.7.0
+    version: ~> 0.7.1
   carbon:
     github: luckyframework/carbon
     version: ~> 0.1.2
@@ -27,4 +27,4 @@ dependencies:
     version: ~> 0.7.0
   lucky_flow:
     github: luckyframework/lucky_flow
-    version: ~> 0.7.0
+    version: ~> 0.7.1
