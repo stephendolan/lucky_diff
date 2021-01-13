@@ -1,0 +1,14 @@
+---
+- name: Install NginX
+  become: true
+  apt:
+    name: nginx
+    state: latest
+    update_cache: true
+
+- name: "Restart Nginx"
+  become: true
+  changed_when: false
+  service:
+    name: nginx
+    state: restarted

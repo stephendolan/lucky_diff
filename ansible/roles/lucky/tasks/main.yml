@@ -1,0 +1,35 @@
+---
+- name: "Write SystemD configuration"
+  become: true
+  changed_when: false
+  blockinfile:
+    path: "/etc/systemd/system/{{ app_name }}.service"
+    create: yes
+    mode: "u=rw,g=r,o=r"
+    marker: "# {mark} ANSIBLE MANAGED SITE CONFIGURATION "
+    block: |
+      [Unit]
+      Description={{ app_name }}
+      After=nginx.service
+
+      [Service]
+      Type=simple
+      User=deploy
+      Environment="LUCKY_ENV=production"
+      Environment="SECRET_KEY_BASE={{ app_secret_key }}"
+      Environment="DATABASE_URL=postgres://username:password@127.0.0.1/{{ app_name }}_production"
+      Environment="HOST=127.0.0.1"
+      Environment="PORT=5000"
+      Environment="APP_DOMAIN={{ app_domain }}"
+      WorkingDirectory=/home/{{ app_name }}_deploy/{{ app_name }}
+      ExecStart=/home/{{ app_name }}_deploy/{{ app_name }}/start_server
+      Restart=on-failure
+
+      [Install]
+      WantedBy=multi-user.target
+
+- name: "Set up Lucky app service"
+  service:
+    name: "{{ app_name }}"
+    state: restarted
+    enabled: yes

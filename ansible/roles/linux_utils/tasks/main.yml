@@ -1,0 +1,22 @@
+---
+# Ensure we always have up-to-date packages
+# - name: Upgrade all existing packages
+#   become: true
+#   apt:
+#     upgrade: safe
+
+# View a list of running processes and system resource consumption
+- name: Install htop
+  become: true
+  apt:
+    name: "htop"
+    state: latest
+    update_cache: true
+
+# More easily find system disk space hogs
+- name: Install ncdu
+  become: true
+  apt:
+    name: "ncdu"
+    state: latest
+    update_cache: true

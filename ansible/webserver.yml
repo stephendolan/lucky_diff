@@ -1,0 +1,32 @@
+---
+# Set up user accounts
+- hosts: all
+  remote_user: root
+  become: true
+  roles:
+    - user_creation
+
+# Install utilities for server management and troubleshooting
+- hosts: all
+  remote_user: "{{ app_name }}_deploy"
+  become: true
+  roles:
+    - linux_utils
+
+# Install NodeJS
+- hosts: all
+  remote_user: "{{ app_name }}_deploy"
+  become: true
+  roles:
+    - geerlingguy.nodejs
+  vars:
+    nodejs_version: "12.x"
+
+# Set up all server installations
+- hosts: all
+  remote_user: "{{ app_name }}_deploy"
+  roles:
+    - yarn
+    - crystal
+    - lucky
+    - nginx

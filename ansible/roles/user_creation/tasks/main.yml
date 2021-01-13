@@ -1,0 +1,30 @@
+---
+- name: Create the deploy group
+  group:
+    name: deploy
+    state: present
+
+- name: Create the deploy user
+  user:
+    name: "{{ app_name }}_deploy"
+    comment: User for application deployment
+    append: yes
+    shell: /bin/bash
+    groups:
+      - deploy
+      - sudo
+
+- name: Allow deploy group to have passwordless sudo
+  lineinfile:
+    dest: /etc/sudoers
+    state: present
+    regexp: "^%deploy"
+    line: "%deploy ALL=(ALL) NOPASSWD: ALL"
+    validate: visudo -cf %s
+
+- name: Add developer deploy SSH keys
+  authorized_key:
+    user: "{{ app_name }}_deploy"
+    key: "{{ item }}"
+  with_items:
+    - https://github.com/stephendolan.keys
