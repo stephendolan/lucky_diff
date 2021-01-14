@@ -1,10 +1,4 @@
 ---
-# Ensure we always have up-to-date packages
-# - name: Upgrade all existing packages
-#   become: true
-#   apt:
-#     upgrade: safe
-
 # View a list of running processes and system resource consumption
 - name: Install htop
   become: true

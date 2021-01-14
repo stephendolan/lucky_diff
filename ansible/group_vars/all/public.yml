@@ -1,4 +1,8 @@
 ---
 app_name: "luckydiff"
 app_domain: "luckydiff.com"
+app_git_url: "https://github.com/stephendolan/lucky_diff"
 certificate_owner: "dolan.stephen1@gmail.com"
+# You must have the following additional variables assigned in an adjacent secret.yml file
+# app_secret_key: get this with `lucky gen.secret`
+# any other secrets in `roles/lucky/tasks/main.yml`, where the SystemD file defines secret Environment variables

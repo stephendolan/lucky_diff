@@ -1,7 +1,31 @@
 ---
+- name: "Clone repository"
+  git:
+    repo: "{{ app_git_url }}"
+    dest: /home/{{ app_name }}_deploy/{{ app_name }}
+
+- name: "Install Crystal app dependencies"
+  command:
+    chdir: /home/{{ app_name }}_deploy/{{ app_name }}
+    cmd: shards install --quiet --production
+
+- name: "Install Yarn app dependencies"
+  command:
+    chdir: /home/{{ app_name }}_deploy/{{ app_name }}
+    cmd: yarn install
+
+- name: "Build application JS assets"
+  command:
+    chdir: /home/{{ app_name }}_deploy/{{ app_name }}
+    cmd: yarn prod
+
+- name: "Build Lucky app binary"
+  command:
+    chdir: /home/{{ app_name }}_deploy/{{ app_name }}
+    cmd: crystal build --release src/start_server.cr -o start_server
+
 - name: "Write SystemD configuration"
   become: true
-  changed_when: false
   blockinfile:
     path: "/etc/systemd/system/{{ app_name }}.service"
     create: yes
@@ -16,8 +40,9 @@
       Type=simple
       User=deploy
       Environment="LUCKY_ENV=production"
+      Environment="NODE_ENV=production"
       Environment="SECRET_KEY_BASE={{ app_secret_key }}"
-      Environment="DATABASE_URL=postgres://username:password@127.0.0.1/{{ app_name }}_production"
+      Environment="SENTRY_DSN={{ sentry_dsn }}"
       Environment="HOST=127.0.0.1"
       Environment="PORT=5000"
       Environment="APP_DOMAIN={{ app_domain }}"
@@ -28,7 +53,7 @@
       [Install]
       WantedBy=multi-user.target
 
-- name: "Set up Lucky app service"
+- name: "Set up {{ app_name }} app service"
   service:
     name: "{{ app_name }}"
     state: restarted

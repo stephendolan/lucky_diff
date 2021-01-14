@@ -25,6 +25,10 @@
 # Set up all server installations
 - hosts: all
   remote_user: "{{ app_name }}_deploy"
+  environment:
+    LUCKY_ENV: production
+    SKIP_LUCKY_TASK_PRECOMPILATION: "1"
+    NODE_ENV: production
   roles:
     - yarn
     - crystal
