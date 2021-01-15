@@ -53,7 +53,8 @@
       [Install]
       WantedBy=multi-user.target
 
-- name: "Set up {{ app_name }} app service"
+- name: "Start up Lucky app service"
+  become: true
   service:
     name: "{{ app_name }}"
     state: restarted

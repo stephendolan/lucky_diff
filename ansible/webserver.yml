@@ -5,6 +5,7 @@
   become: true
   roles:
     - user_creation
+    - swap_memory
 
 # Install utilities for server management and troubleshooting
 - hosts: all
@@ -28,7 +29,6 @@
   environment:
     LUCKY_ENV: production
     SKIP_LUCKY_TASK_PRECOMPILATION: "1"
-    NODE_ENV: production
   roles:
     - yarn
     - crystal
