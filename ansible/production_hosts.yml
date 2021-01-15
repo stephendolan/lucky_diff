@@ -1,5 +1,5 @@
 ---
 all:
   hosts:
-    207.246.80.115:
+    144.202.7.163:
       ansible_python_interpreter: /usr/bin/python3
