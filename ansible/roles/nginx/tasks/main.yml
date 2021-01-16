@@ -2,9 +2,64 @@
 - name: Install NginX
   become: true
   apt:
-    name: nginx
+    name:
+      - nginx
     state: latest
     update_cache: true
+
+- name: "Write SystemD configuration"
+  become: true
+  blockinfile:
+    path: "/etc/nginx/sites-available/{{ app_name }}"
+    create: yes
+    mode: "u=rw,g=r,o=r"
+    marker: "# {mark} ANSIBLE MANAGED SITE CONFIGURATION "
+    block: |
+      server {
+          server_name {{ app_domain }} www.{{ app_domain }};
+
+          location / {
+              proxy_pass http://localhost:5000;
+          }
+      }
+
+- name: "Enable Nginx site configuration"
+  become: true
+  file:
+    src: "/etc/nginx/sites-available/{{ app_name }}"
+    dest: "/etc/nginx/sites-enabled/{{ app_name }}"
+    state: link
+
+- name: "Disable default Nginx site configuration"
+  become: true
+  file:
+    path: /etc/nginx/sites-enabled/default
+    state: absent
+
+- name: "Remove default Nginx site configuration"
+  become: true
+  file:
+    path: /etc/nginx/sites-available/default
+    state: absent
+
+- name: Install Certbot
+  become: true
+  snap:
+    name: certbot
+    classic: yes
+
+- name: "Run CertBot"
+  become: true
+  command: "certbot --nginx --agree-tos --staple-ocsp -m {{ certificate_owner }} -d {{ app_domain }} -n"
+  changed_when: false
+
+- name: Autorenew CertBot certificate every week as root user
+  remote_user: root
+  become: true
+  cron:
+    name: "SSL Renewal"
+    special_time: weekly
+    job: "certbot renew >/dev/null 2>&1"
 
 - name: "Restart Nginx"
   become: true

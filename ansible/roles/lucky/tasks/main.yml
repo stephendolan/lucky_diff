@@ -38,7 +38,9 @@
 
       [Service]
       Type=simple
-      User=deploy
+      Restart=always
+      RestartSec=5s
+      User={{ app_name }}_deploy
       Environment="LUCKY_ENV=production"
       Environment="NODE_ENV=production"
       Environment="SECRET_KEY_BASE={{ app_secret_key }}"
@@ -48,7 +50,6 @@
       Environment="APP_DOMAIN={{ app_domain }}"
       WorkingDirectory=/home/{{ app_name }}_deploy/{{ app_name }}
       ExecStart=/home/{{ app_name }}_deploy/{{ app_name }}/start_server
-      Restart=on-failure
 
       [Install]
       WantedBy=multi-user.target
@@ -58,4 +59,5 @@
   service:
     name: "{{ app_name }}"
     state: restarted
+    daemon_reload: yes
     enabled: yes
