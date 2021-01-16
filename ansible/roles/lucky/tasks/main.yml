@@ -19,10 +19,20 @@
     chdir: /home/{{ app_name }}_deploy/{{ app_name }}
     cmd: yarn prod
 
-- name: "Build Lucky app binary"
+- name: "Build temporary Lucky binary"
   command:
     chdir: /home/{{ app_name }}_deploy/{{ app_name }}
-    cmd: crystal build --release src/start_server.cr -o start_server
+    cmd: crystal build --release src/start_server.cr -o tmp_start_server
+
+- name: "Replace existing Lucky binary"
+  command:
+    chdir: /home/{{ app_name }}_deploy/{{ app_name }}
+    cmd: mv --force tmp_start_server start_server
+
+- name: "Remove temporary Lucky binary"
+  file:
+    path: /home/{{ app_name }}_deploy/{{ app_name }}/tmp_start_server
+    state: absent
 
 - name: "Write SystemD configuration"
   become: true
