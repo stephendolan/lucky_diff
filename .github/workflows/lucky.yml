@@ -103,16 +103,14 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - uses: webfactory/ssh-agent@v0.4.1
-        with:
-          ssh-private-key: ${{ secrets.SSH_DEPLOY_PRIVATE_KEY }}
-
       - name: Run Ansible playbook
         env:
           ANSIBLE_VAULT_PASSWORD: ${{ secrets.ANSIBLE_VAULT_PASSWORD }}
-          ANSIBLE_HOST_KEY_CHECKING: "False"
+          SSH_DEPLOY_PRIVATE_KEY: ${{ secrets.SSH_DEPLOY_PRIVATE_KEY }}
         run: |
+          ssh-keyscan -H ${{secrets.SSH_DEPLOY_SERVER_IP}} > ~/.ssh/known_hosts
           cd ansible
+          echo "$SSH_DEPLOY_PRIVATE_KEY" > private-ssh-key
           echo "$ANSIBLE_VAULT_PASSWORD" > vault-password.txt
           ansible-galaxy install -r requirements.yml
-          ansible-playbook -i production_hosts.yml webserver.yml --vault-password-file vault-password.txt
+          ansible-playbook -i production_hosts.yml webserver.yml --vault-password-file vault-password.txt --private-key private-ssh-key
