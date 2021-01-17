@@ -98,8 +98,8 @@ jobs:
   Deploy:
     runs-on: ubuntu-latest
     container:
-      image: ubuntu:latest
-    needs: [CheckFormat, RunSpecs]
+      image: ubuntu:20.04
+    # needs: [CheckFormat, RunSpecs]
     if: github.ref == 'refs/heads/main'
 
     steps:
