@@ -1,7 +1,7 @@
 ---
 # Set up user accounts
 - hosts: all
-  remote_user: root
+  remote_user: "{{ root_user }}"
   become: true
   roles:
     - user_creation
@@ -9,14 +9,14 @@
 
 # Install utilities for server management and troubleshooting
 - hosts: all
-  remote_user: "{{ app_name }}_deploy"
+  remote_user: "{{ deploy_user }}"
   become: true
   roles:
     - linux_utils
 
 # Install NodeJS
 - hosts: all
-  remote_user: "{{ app_name }}_deploy"
+  remote_user: "{{ deploy_user }}"
   become: true
   roles:
     - geerlingguy.nodejs
@@ -25,7 +25,7 @@
 
 # Set up all server installations
 - hosts: all
-  remote_user: "{{ app_name }}_deploy"
+  remote_user: "{{ deploy_user }}"
   environment:
     LUCKY_ENV: production
     SKIP_LUCKY_TASK_PRECOMPILATION: "1"

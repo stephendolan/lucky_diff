@@ -6,7 +6,7 @@
 
 - name: Create the deploy user
   user:
-    name: "{{ app_name }}_deploy"
+    name: "{{ deploy_user }}"
     comment: User for application deployment
     append: yes
     shell: /bin/bash
@@ -24,7 +24,7 @@
 
 - name: Add developer deploy SSH keys
   authorized_key:
-    user: "{{ app_name }}_deploy"
+    user: "{{ deploy_user }}"
     key: "{{ item }}"
   with_items:
     - https://github.com/stephendolan.keys

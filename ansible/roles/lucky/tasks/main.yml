@@ -1,73 +1,58 @@
 ---
-- name: "Clone repository"
+- name: "Clone {{ app_name }} repository"
+  register: repository_clone_result
   git:
     repo: "{{ app_git_url }}"
-    dest: /home/{{ app_name }}_deploy/{{ app_name }}
+    dest: "{{ app_directory }}"
+    version: "{{ app_git_default_branch }}"
+    force: yes
 
-- name: "Install Crystal app dependencies"
+- name: "Check Crystal app dependencies"
+  register: shard_check_result
+  changed_when: false
+  failed_when: false
   command:
-    chdir: /home/{{ app_name }}_deploy/{{ app_name }}
+    chdir: "{{ app_directory }}"
+    cmd: shards check --production
+
+# We only run this step when the `shards check` command fails,
+# which means some dependencies are out of date.
+- name: "Install Crystal app dependencies"
+  when: "shard_check_result.rc == 1"
+  command:
+    chdir: "{{ app_directory }}"
     cmd: shards install --quiet --production
 
-- name: "Install Yarn app dependencies"
+- name: "Check Yarn app dependencies"
+  register: yarn_check_result
+  changed_when: false
+  failed_when: false
   command:
-    chdir: /home/{{ app_name }}_deploy/{{ app_name }}
-    cmd: yarn install
+    chdir: "{{ app_directory }}"
+    cmd: yarn check --silent
 
-- name: "Build application JS assets"
+# We only run this step when the `yarn check` command fails,
+# which means some dependencies are out of date.
+- name: "Install Yarn app dependencies"
+  when: "yarn_check_result.rc == 1"
   command:
-    chdir: /home/{{ app_name }}_deploy/{{ app_name }}
+    chdir: "{{ app_directory }}"
+    cmd: yarn install --silent --non-interactive
+
+# Build JS assets when the checked out code git revision has changed,
+# which means that new code is present that could include asset changes.
+- name: "Build application JS assets"
+  register: js_build_result
+  when: "repository_clone_result.changed"
+  command:
+    chdir: "{{ app_directory }}"
     cmd: yarn prod
 
-- name: "Build temporary Lucky binary"
+# Build the app binary when the checked out code git revision has changed,
+# since there's the chance that Crystal code has been modified.
+- name: "Build Lucky binary"
+  register: binary_result
+  when: "repository_clone_result.changed"
   command:
-    chdir: /home/{{ app_name }}_deploy/{{ app_name }}
-    cmd: crystal build --release src/start_server.cr -o tmp_start_server
-
-- name: "Replace existing Lucky binary"
-  command:
-    chdir: /home/{{ app_name }}_deploy/{{ app_name }}
-    cmd: mv --force tmp_start_server start_server
-
-- name: "Remove temporary Lucky binary"
-  file:
-    path: /home/{{ app_name }}_deploy/{{ app_name }}/tmp_start_server
-    state: absent
-
-- name: "Write SystemD configuration"
-  become: true
-  blockinfile:
-    path: "/etc/systemd/system/{{ app_name }}.service"
-    create: yes
-    mode: "u=rw,g=r,o=r"
-    marker: "# {mark} ANSIBLE MANAGED SITE CONFIGURATION "
-    block: |
-      [Unit]
-      Description={{ app_name }}
-      After=nginx.service
-
-      [Service]
-      Type=simple
-      Restart=always
-      RestartSec=5s
-      User={{ app_name }}_deploy
-      Environment="LUCKY_ENV=production"
-      Environment="NODE_ENV=production"
-      Environment="SECRET_KEY_BASE={{ app_secret_key }}"
-      Environment="SENTRY_DSN={{ sentry_dsn }}"
-      Environment="HOST=127.0.0.1"
-      Environment="PORT=5000"
-      Environment="APP_DOMAIN={{ app_domain }}"
-      WorkingDirectory=/home/{{ app_name }}_deploy/{{ app_name }}
-      ExecStart=/home/{{ app_name }}_deploy/{{ app_name }}/start_server
-
-      [Install]
-      WantedBy=multi-user.target
-
-- name: "Start up Lucky app service"
-  become: true
-  service:
-    name: "{{ app_name }}"
-    state: restarted
-    daemon_reload: yes
-    enabled: yes
+    chdir: "{{ app_directory }}"
+    cmd: crystal build --release src/start_server.cr -o start_server
