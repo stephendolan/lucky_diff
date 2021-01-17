@@ -105,10 +105,10 @@ jobs:
 
       - name: Install Ansible
         run: |
-          apt-get update
-          apt-get -yqq install software-properties-common
-          apt-add-repository --yes --update ppa:ansible/ansible
-          apt-get -yqq install ansible
+          sudo apt-get update
+          sudo apt-get -yqq install software-properties-common
+          sudo apt-add-repository --yes --update ppa:ansible/ansible
+          sudo apt-get -yqq install ansible
 
       - uses: webfactory/ssh-agent@v0.4.1
         with:
