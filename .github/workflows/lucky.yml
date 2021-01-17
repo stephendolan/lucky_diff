@@ -110,6 +110,10 @@ jobs:
           apt-add-repository --yes --update ppa:ansible/ansible
           apt-get -yqq install ansible
 
+      - uses: webfactory/ssh-agent@v0.4.1
+        with:
+          ssh-private-key: ${{ secrets.SSH_DEPLOY_PRIVATE_KEY }}
+
       - name: Run Ansible playbook
         env:
           ANSIBLE_VAULT_PASSWORD: ${{ secrets.ANSIBLE_VAULT_PASSWORD }}
