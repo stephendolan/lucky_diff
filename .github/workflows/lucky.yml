@@ -108,6 +108,7 @@ jobs:
           ANSIBLE_VAULT_PASSWORD: ${{ secrets.ANSIBLE_VAULT_PASSWORD }}
           SSH_DEPLOY_PRIVATE_KEY: ${{ secrets.SSH_DEPLOY_PRIVATE_KEY }}
         run: |
+          mkdir ~/.ssh
           ssh-keyscan -H ${{secrets.SSH_DEPLOY_SERVER_IP}} > ~/.ssh/known_hosts
           cd ansible
           echo "$SSH_DEPLOY_PRIVATE_KEY" > private-ssh-key
