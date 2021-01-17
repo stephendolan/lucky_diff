@@ -97,7 +97,7 @@ jobs:
 
   Deploy:
     runs-on: ubuntu-latest
-    # needs: [CheckFormat, RunSpecs]
+    needs: [CheckFormat, RunSpecs]
     if: github.ref == 'refs/heads/main'
 
     steps:
