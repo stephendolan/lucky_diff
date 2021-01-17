@@ -7,6 +7,9 @@ on:
   pull_request:
     branches:
       - "*"
+  schedule:
+    - cron: "30 2 * * *"
+  workflow_dispatch:
 
 jobs:
   CheckFormat:
@@ -32,62 +35,86 @@ jobs:
       LUCKY_ENV: test
 
     steps:
-    - uses: actions/checkout@v2
+      - uses: actions/checkout@v2
 
-    - name: Install Chromedriver
-      run: |
-        apt-get update
-        apt-get -yqq install chromium-chromedriver
+      - name: Install Chromedriver
+        run: |
+          apt-get update
+          apt-get -yqq install chromium-chromedriver
 
-    - uses: actions/setup-node@v2.1.4
-      with:
-        node-version: '12.x'
-    - name: "Install yarn"
-      run: npm install -g yarn
+      - uses: actions/setup-node@v2.1.4
+        with:
+          node-version: "12.x"
+      - name: "Install yarn"
+        run: npm install -g yarn
 
-    - name: Get yarn cache directory path
-      id: yarn-cache-dir-path
-      run: echo "::set-output name=dir::$(yarn cache dir)"
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn cache dir)"
 
-    - name: Set up Yarn cache
-      uses: actions/cache@v2
-      with:
-        path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-        key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-        restore-keys: |
-          ${{ runner.os }}-yarn-
+      - name: Set up Yarn cache
+        uses: actions/cache@v2
+        with:
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
 
-    - name: Set up Node cache
-      uses: actions/cache@v2
-      id: node-cache # use this to check for `cache-hit` (`steps.node-cache.outputs.cache-hit != 'true'`)
-      with:
-        path: '**/node_modules'
-        key: ${{ runner.os }}-node-${{ hashFiles('**/yarn.lock') }}
-        restore-keys: |
-          ${{ runner.os }}-node-
+      - name: Set up Node cache
+        uses: actions/cache@v2
+        id: node-cache # use this to check for `cache-hit` (`steps.node-cache.outputs.cache-hit != 'true'`)
+        with:
+          path: "**/node_modules"
+          key: ${{ runner.os }}-node-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
 
-    - name: Set up Crystal cache
-      uses: actions/cache@v2
-      id: crystal-cache
-      with:
-        path: |
-          ~/.cache/crystal
-          lib
-          lucky_tasks
-        key: ${{ runner.os }}-crystal-${{ hashFiles('**/shard.lock') }}
-        restore-keys: |
-          ${{ runner.os }}-crystal-
+      - name: Set up Crystal cache
+        uses: actions/cache@v2
+        id: crystal-cache
+        with:
+          path: |
+            ~/.cache/crystal
+            lib
+            lucky_tasks
+          key: ${{ runner.os }}-crystal-${{ hashFiles('**/shard.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-crystal-
 
-    - name: Install shards
-      if: steps.crystal-cache.outputs.cache-hit != 'true'
-      run: shards check || shards install
+      - name: Install shards
+        if: steps.crystal-cache.outputs.cache-hit != 'true'
+        run: shards check || shards install
 
-    - name: Install yarn packages
-      if: steps.node-cache.outputs.cache-hit != 'true'
-      run: yarn install --frozen-lockfile --no-progress
+      - name: Install yarn packages
+        if: steps.node-cache.outputs.cache-hit != 'true'
+        run: yarn install --frozen-lockfile --no-progress
 
-    - name: Compiling assets
-      run: yarn prod
+      - name: Compiling assets
+        run: yarn prod
 
-    - name: Run tests
-      run: crystal spec
+      - name: Run tests
+        run: crystal spec
+
+  Deploy:
+    runs-on: ubuntu-latest
+    needs: [CheckFormat, RunSpecs]
+    if: github.ref == 'refs/heads/main'
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install Ansible
+        run: |
+          apt-get update
+          apt-get -yqq install software-properties-common
+          apt-add-repository --yes --update ppa:ansible/ansible
+          apt-get -yqq install ansible
+
+      - name: Run Ansible playbook
+        env:
+          ANSIBLE_VAULT_PASSWORD: ${{ secrets.ANSIBLE_VAULT_PASSWORD }}
+        run: |
+          cd ansible
+          echo "$ANSIBLE_VAULT_PASSWORD" > vault-password.txt
+          ansible-galaxy install -r requirements.yml
+          ansible-playbook -i production_hosts.yml webserver.yml --vault-password-file vault-password.txt
