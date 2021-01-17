@@ -97,6 +97,8 @@ jobs:
 
   Deploy:
     runs-on: ubuntu-latest
+    container:
+      image: ubuntu:latest
     needs: [CheckFormat, RunSpecs]
     if: github.ref == 'refs/heads/main'
 
@@ -105,10 +107,10 @@ jobs:
 
       - name: Install Ansible
         run: |
-          sudo apt-get update
-          sudo apt-get -yqq install software-properties-common
-          sudo apt-add-repository --yes --update ppa:ansible/ansible
-          sudo apt-get -yqq install ansible
+          apt-get update
+          apt-get -yqq install software-properties-common
+          apt-add-repository --yes --update ppa:ansible/ansible
+          apt-get -yqq install ansible
 
       - uses: webfactory/ssh-agent@v0.4.1
         with:
