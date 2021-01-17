@@ -117,6 +117,7 @@ jobs:
       - name: Run Ansible playbook
         env:
           ANSIBLE_VAULT_PASSWORD: ${{ secrets.ANSIBLE_VAULT_PASSWORD }}
+          ANSIBLE_HOST_KEY_CHECKING: "False"
         run: |
           cd ansible
           echo "$ANSIBLE_VAULT_PASSWORD" > vault-password.txt
