@@ -112,6 +112,7 @@ jobs:
           ssh-keyscan -H ${{secrets.SSH_DEPLOY_SERVER_IP}} > ~/.ssh/known_hosts
           cd ansible
           echo "$SSH_DEPLOY_PRIVATE_KEY" > private-ssh-key
+          chmod 600 private-ssh-key
           echo "$ANSIBLE_VAULT_PASSWORD" > vault-password.txt
           ansible-galaxy install -r requirements.yml
           ansible-playbook -i production_hosts.yml webserver.yml --vault-password-file vault-password.txt --private-key private-ssh-key
