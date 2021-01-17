@@ -1,0 +1,155 @@
+---
+- name: Install NginX
+  become: true
+  apt:
+    name:
+      - nginx
+    state: latest
+    update_cache: true
+
+# Install Certbot from snap per the official docs:
+# https://certbot.eff.org/lets-encrypt/ubuntufocal-nginx
+- name: Install Certbot
+  become: true
+  snap:
+    name: certbot
+    classic: yes
+
+- name: "Run CertBot"
+  become: true
+  command: "certbot certonly --nginx --agree-tos --staple-ocsp -m {{ ssl_certificate_owner }} -d {{ app_domain }} -n"
+  changed_when: false
+
+- name: "Add key for Phusion Passenger"
+  become: true
+  apt_key:
+    id: 561F9B9CAC40B2F7
+    keyserver: hkp://keyserver.ubuntu.com:80
+    state: present
+
+- name: Add Phusion Passenger repository
+  become: true
+  apt_repository:
+    repo: deb https://oss-binaries.phusionpassenger.com/apt/passenger focal main
+    state: present
+
+- name: Install Phusion Passenger
+  become: true
+  apt:
+    name:
+      - libnginx-mod-http-passenger
+    state: latest
+    update_cache: true
+
+- name: "Enable Phusion Passenger NginX module"
+  become: true
+  file:
+    src: "/usr/share/nginx/modules-available/mod-http-passenger.load"
+    dest: "/etc/nginx/modules-enabled/50-mod-http-passenger.conf"
+    state: link
+
+- name: "Update Nginx base configuration file"
+  become: true
+  blockinfile:
+    path: /etc/nginx/nginx.conf
+    marker: "# {mark} ANSIBLE MANAGED BLOCK"
+    insertafter: '^http\s*\{'
+    content: |
+      client_max_body_size 100M;
+      server_tokens off;
+
+- name: "Write NginX site configuration"
+  become: true
+  blockinfile:
+    path: "/etc/nginx/sites-available/{{ app_domain }}"
+    create: yes
+    mode: "u=rw,g=r,o=r"
+    marker: "# {mark} ANSIBLE MANAGED SITE CONFIGURATION "
+    block: |
+      server {
+          listen [::]:443 ssl ipv6only=on;
+          listen 443 ssl;
+
+          server_name {{ app_domain }};
+
+          passenger_enabled on;
+          passenger_app_start_command {{ app_directory }}/start_server;
+
+          passenger_env_var LUCKY_ENV production;
+          passenger_env_var NODE_ENV production;
+          passenger_env_var SECRET_KEY_BASE {{ app_secret_key }};
+          passenger_env_var SENTRY_DSN {{ sentry_dsn }};
+          passenger_env_var SEND_GRID_KEY unused;
+          passenger_env_var HOST 127.0.0.1;
+          passenger_env_var PORT 5000;
+          passenger_env_var APP_DOMAIN {{ app_domain }};
+
+          root {{ app_directory }}/public;
+
+          ssl_certificate /etc/letsencrypt/live/{{ app_domain }}/fullchain.pem;
+          ssl_certificate_key /etc/letsencrypt/live/{{ app_domain }}/privkey.pem;
+          include /etc/letsencrypt/options-ssl-nginx.conf;
+          ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
+          ssl_trusted_certificate /etc/letsencrypt/live/{{ app_domain }}/chain.pem;
+          ssl_stapling on;
+          ssl_stapling_verify on;
+      }
+
+      server {
+        if ($host = {{ app_domain }}) {
+            return 301 https://$host$request_uri;
+        }
+
+        listen [::]:80 ipv6only=on;
+        listen 80;
+
+        server_name {{ app_domain }};
+        return 404;
+      }
+
+- name: "Enable Nginx site configuration"
+  become: true
+  file:
+    src: "/etc/nginx/sites-available/{{ app_domain }}"
+    dest: "/etc/nginx/sites-enabled/{{ app_domain }}"
+    state: link
+
+- name: "Disable default Nginx site configuration"
+  become: true
+  file:
+    path: /etc/nginx/sites-enabled/default
+    state: absent
+
+- name: "Remove default Nginx site configuration"
+  become: true
+  file:
+    path: /etc/nginx/sites-available/default
+    state: absent
+
+- name: "Ensure that Certbot auto-renewal timer systemctl service exists"
+  become: true
+  service:
+    name: certbot.timer
+    masked: true
+
+- name: "Restart Nginx"
+  become: true
+  changed_when: false
+  service:
+    name: nginx
+    state: restarted
+    enabled: true
+
+- name: "Restart application"
+  become: true
+  changed_when: false
+  command:
+    cmd: "passenger-config restart-app {{ app_directory }} --ignore-app-not-running"
+
+- name: Check that application is available via HTTP
+  uri:
+    url: "http://{{ app_domain }}"
+
+- name: Check that application is available via HTTPS
+  uri:
+    url: "https://{{ app_domain }}"

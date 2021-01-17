@@ -1,0 +1,44 @@
+---
+- name: Update all installed packages to latest stable versions
+  become: true
+  apt:
+    force_apt_get: true
+    upgrade: dist
+
+# View a list of running processes and system resource consumption
+- name: Install htop
+  become: true
+  apt:
+    name:
+      - "htop"
+    state: latest
+    update_cache: true
+
+# More easily find system disk space hogs
+- name: Install ncdu
+  become: true
+  apt:
+    name:
+      - "ncdu"
+    state: latest
+    update_cache: true
+
+# Allow for installing APT packages over HTTPS and with PGP keys
+- name: Install better apt support
+  become: true
+  apt:
+    name:
+      - "dirmngr"
+      - "gnupg"
+      - "apt-transport-https"
+      - "ca-certificates"
+    state: latest
+    update_cache: true
+
+- name: Remove useless packages from the cache
+  apt:
+    autoclean: yes
+
+- name: Remove dependencies that are no longer required
+  apt:
+    autoremove: yes

@@ -1,0 +1,18 @@
+---
+app_name: "luckydiff"
+app_domain: "luckydiff.com"
+app_git_url: "https://github.com/stephendolan/lucky_diff"
+app_git_default_branch: "main"
+
+root_user: "ubuntu"
+deploy_user: "{{ app_name }}_deploy"
+app_directory: "/home/{{ deploy_user }}/{{ app_name }}"
+
+swapfile_path: "/swapfile_{{ app_name }}"
+swapfile_swappiness: "10"
+
+ssl_certificate_owner: "stephen@luckycasts.com"
+# You must *also* have the following additional variables assigned in an adjacent secret.yml file
+# app_secret_key: get this with `lucky gen.secret`
+#
+# Generate this file with `ansible-vault create group_vars/all/secret.yml`.
