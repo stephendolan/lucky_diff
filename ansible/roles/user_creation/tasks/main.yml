@@ -22,14 +22,14 @@
     line: "%deploy ALL=(ALL) NOPASSWD: ALL"
     validate: visudo -cf %s
 
-- name: Add deploy SSH keys
+- name: Add deploy user authorized SSH keys
   authorized_key:
     user: "{{ deploy_user }}"
     key: "{{ item }}"
   with_items:
     - https://github.com/stephendolan.keys
 
-- name: Add deploy SSH keys
+- name: Add root user authorized SSH keys
   authorized_key:
     user: "{{ root_user }}"
     key: "{{ item }}"
