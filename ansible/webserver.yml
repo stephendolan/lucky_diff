@@ -1,5 +1,5 @@
 ---
-# Set up user accounts
+# Set up user accounts and swap memory
 - hosts: all
   remote_user: "{{ root_user }}"
   become: true
