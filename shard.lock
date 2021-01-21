@@ -2,7 +2,7 @@ version: 2.0
 shards:
   any_hash:
     git: https://github.com/Sija/any_hash.cr.git
-    version: 0.2.3
+    version: 0.2.4
 
   authentic:
     git: https://github.com/luckyframework/authentic.git
@@ -10,7 +10,11 @@ shards:
 
   avram:
     git: https://github.com/luckyframework/avram.git
-    version: 0.18.0
+    version: 0.18.2
+
+  backtracer:
+    git: https://github.com/Sija/backtracer.cr.git
+    version: 1.2.1
 
   blank:
     git: https://github.com/kostya/blank.git
@@ -78,7 +82,7 @@ shards:
 
   raven:
     git: https://github.com/Sija/raven.cr.git
-    version: 1.8.1
+    version: 1.9.0
 
   selenium:
     git: https://github.com/matthewmcgarvey/selenium.cr.git
@@ -94,7 +98,7 @@ shards:
 
   webdrivers:
     git: https://github.com/matthewmcgarvey/webdrivers.cr.git
-    version: 0.3.0
+    version: 0.3.1
 
   wordsmith:
     git: https://github.com/luckyframework/wordsmith.git
