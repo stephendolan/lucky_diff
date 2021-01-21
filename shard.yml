@@ -12,7 +12,8 @@ crystal: 0.35.1
 
 dependencies:
   raven:
-    github: "Sija/raven.cr"
+    github: Sija/raven.cr
+    version: ~> 1.9.0
   lucky:
     github: luckyframework/lucky
     version: ~> 0.25.0
