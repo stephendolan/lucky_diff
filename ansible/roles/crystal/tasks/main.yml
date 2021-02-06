@@ -1,27 +1,3 @@
-# https://crystal-lang.org/install/on_ubuntu/
-- name: Add Crystal repository key
-  become: true
-  apt_key:
-    url: https://keybase.io/crystal/pgp_keys.asc
-    state: present
-
-# https://crystal-lang.org/install/on_ubuntu/
-- name: Add Crystal repository
-  become: true
-  apt_repository:
-    repo: deb https://dist.crystal-lang.org/apt crystal main
-    state: present
-
-# https://crystal-lang.org/install/on_ubuntu/
-- name: Install Crystal and dependencies
-  become: true
-  apt:
-    name:
-      - crystal
-      - libssl-dev
-      - libxml2-dev
-      - libyaml-dev
-      - libgmp-dev
-      - libz-dev
-    state: latest
-    update_cache: true
+- name: "Install Crystal"
+  command:
+    cmd: curl -fsSL https://crystal-lang.org/install.sh | sudo bash -s -- --crystal=0.36.1
