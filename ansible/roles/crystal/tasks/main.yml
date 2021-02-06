@@ -1,3 +1,7 @@
+- name: "Fetch Crystal installer"
+  get_url:
+    url: https://crystal-lang.org/install.sh
+    dest: /tmp/install_crystal.sh
+
 - name: "Install Crystal"
-  command:
-    cmd: curl -fsSL https://crystal-lang.org/install.sh | sudo bash -s -- --crystal=0.36.1
+  shell: /tmp/install_crystal.sh --crystal=0.36.1
