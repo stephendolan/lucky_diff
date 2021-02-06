@@ -1,3 +1,4 @@
 - name: "Install Crystal"
   become: true
+  warn: false
   shell: curl -fsSL https://crystal-lang.org/install.sh | sudo bash -s -- --crystal=0.36.1
