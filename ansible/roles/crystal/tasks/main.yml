@@ -2,6 +2,7 @@
   get_url:
     url: https://crystal-lang.org/install.sh
     dest: ./install_crystal.sh
+    mode: 0755
 
 - name: "Install Crystal"
   command:
