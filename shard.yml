@@ -16,16 +16,10 @@ dependencies:
     version: ~> 1.9.0
   lucky:
     github: luckyframework/lucky
-    version: ~> 0.25.0
-  authentic:
-    github: luckyframework/authentic
-    version: ~> 0.7.1
-  carbon:
-    github: luckyframework/carbon
-    version: ~> 0.1.2
+    version: ~> 0.26.0
   dotenv:
     github: gdotdesign/cr-dotenv
     version: ~> 0.7.0
   lucky_flow:
     github: luckyframework/lucky_flow
-    version: ~> 0.7.1
+    version: ~> 0.7.2

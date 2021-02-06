@@ -4,13 +4,9 @@ shards:
     git: https://github.com/Sija/any_hash.cr.git
     version: 0.2.4
 
-  authentic:
-    git: https://github.com/luckyframework/authentic.git
-    version: 0.7.1
-
   avram:
     git: https://github.com/luckyframework/avram.git
-    version: 0.18.2
+    version: 0.19.0
 
   backtracer:
     git: https://github.com/Sija/backtracer.cr.git
@@ -20,17 +16,13 @@ shards:
     git: https://github.com/kostya/blank.git
     version: 0.1.0
 
-  carbon:
-    git: https://github.com/luckyframework/carbon.git
-    version: 0.1.2
-
   cry:
     git: https://github.com/luckyframework/cry.git
     version: 0.4.2
 
   crystar:
     git: https://github.com/naqvis/crystar.git
-    version: 0.1.8
+    version: 0.1.9
 
   db:
     git: https://github.com/crystal-lang/crystal-db.git
@@ -38,7 +30,7 @@ shards:
 
   dexter:
     git: https://github.com/luckyframework/dexter.git
-    version: 0.3.1
+    version: 0.3.2
 
   dotenv:
     git: https://github.com/gdotdesign/cr-dotenv.git
@@ -58,23 +50,23 @@ shards:
 
   lucky:
     git: https://github.com/luckyframework/lucky.git
-    version: 0.25.0
+    version: 0.26.0
 
   lucky_cli:
     git: https://github.com/luckyframework/lucky_cli.git
-    version: 0.25.0
+    version: 0.26.0
 
   lucky_flow:
     git: https://github.com/luckyframework/lucky_flow.git
-    version: 0.7.1
+    version: 0.7.2
 
   lucky_router:
     git: https://github.com/luckyframework/lucky_router.git
-    version: 0.4.0
+    version: 0.4.1
 
   pg:
     git: https://github.com/will/crystal-pg.git
-    version: 0.22.1
+    version: 0.23.1
 
   pulsar:
     git: https://github.com/luckyframework/pulsar.git
@@ -82,11 +74,11 @@ shards:
 
   raven:
     git: https://github.com/Sija/raven.cr.git
-    version: 1.9.0
+    version: 1.9.1
 
   selenium:
     git: https://github.com/matthewmcgarvey/selenium.cr.git
-    version: 0.8.0
+    version: 0.9.0
 
   shell-table:
     git: https://github.com/luckyframework/shell-table.cr.git
@@ -98,7 +90,7 @@ shards:
 
   webdrivers:
     git: https://github.com/matthewmcgarvey/webdrivers.cr.git
-    version: 0.3.1
+    version: 0.3.2
 
   wordsmith:
     git: https://github.com/luckyframework/wordsmith.git

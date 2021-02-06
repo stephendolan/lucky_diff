@@ -13,7 +13,6 @@ require "../db/migrations/**"
 # configuring LuckyFlow, starting the app server, etc.
 require "./setup/**"
 
-include Carbon::Expectations
 include Lucky::RequestExpectations
 include LuckyFlow::Expectations
 

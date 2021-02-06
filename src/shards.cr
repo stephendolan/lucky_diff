@@ -5,7 +5,5 @@ Dotenv.load?
 # Require your shards here
 require "avram"
 require "lucky"
-require "carbon"
-require "authentic"
 require "raven"
 require "raven/integrations/lucky"
