@@ -31,6 +31,5 @@
     SKIP_LUCKY_TASK_PRECOMPILATION: "1"
   roles:
     - yarn
-    - crystal
     - lucky
     - nginx
