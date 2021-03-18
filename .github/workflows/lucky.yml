@@ -129,4 +129,4 @@ jobs:
           chmod 600 private-ssh-key
           echo "$ANSIBLE_VAULT_PASSWORD" > vault-password.txt
           ansible-galaxy install -r requirements.yml
-          ansible-playbook -i production_hosts.yml webserver.yml --vault-password-file vault-password.txt --private-key private-ssh-key
+          ansible-playbook -i production_hosts.yml code_deploy.yml --vault-password-file vault-password.txt --private-key private-ssh-key

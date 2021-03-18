@@ -56,3 +56,11 @@
   command:
     chdir: "{{ app_directory }}"
     cmd: crystal build --release src/start_server.cr -o start_server
+
+- name: "Restart Nginx"
+  become: true
+  changed_when: false
+  service:
+    name: nginx
+    state: restarted
+    enabled: true
