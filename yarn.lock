@@ -2914,10 +2914,10 @@ didyoumean@^1.2.1:
   resolved "https://registry.yarnpkg.com/didyoumean/-/didyoumean-1.2.1.tgz#e92edfdada6537d484d73c0172fd1eba0c4976ff"
   integrity sha1-6S7f2tplN9SE1zwBcv0eugxJdv8=
 
-diff2html@^3.1.17:
-  version "3.1.18"
-  resolved "https://registry.yarnpkg.com/diff2html/-/diff2html-3.1.18.tgz#9da0816dc7aee9d0175195635a1b50f3185fcfef"
-  integrity sha512-1S3ubwa8+frMFsQ6rQLiXAkUtPoqzXdx6I/Q4I/a0pPXJQd1LfuqJY4s2ZUj2ahzODr/7nc6Bn1pWJrU1i9MEQ==
+diff2html@^3.4.0:
+  version "3.4.0"
+  resolved "https://registry.yarnpkg.com/diff2html/-/diff2html-3.4.0.tgz#71061552c4455c1e2020938807ac51aca09fd549"
+  integrity sha512-FiBWKwaDK7Sro3RkH1OcBLZ9qcTMvnZqhw/M4imvPLtlcNGdf5HM7S9e16Xf9X6n40LN0bUOU5iQjY3g6jF+2Q==
   dependencies:
     diff "4.0.2"
     hogan.js "3.0.2"
