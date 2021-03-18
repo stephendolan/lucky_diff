@@ -6,8 +6,14 @@ services:
       branch: main
       deploy_on_push: true
       repo: stephendolan/lucky_diff
-    name: lucky-casts
+    name: lucky-diff
     envs:
       - key: LUCKY_ENV
         scope: RUN_TIME
         value: production
+      - key: NODE_ENV
+        scope: RUN_TIME
+        value: production
+      - key: APP_DOMAIN
+        scope: RUN_TIME
+        value: luckydiff.com
