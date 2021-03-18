@@ -1,0 +1,13 @@
+name: lucky-diff
+
+services:
+  - dockerfile_path: dockerfiles/webserver.Dockerfile
+    github:
+      branch: main
+      deploy_on_push: true
+      repo: stephendolan/lucky_diff
+    name: lucky-casts
+    envs:
+      - key: LUCKY_ENV
+        scope: RUN_TIME
+        value: production
