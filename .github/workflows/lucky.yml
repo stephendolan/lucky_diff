@@ -53,7 +53,7 @@ jobs:
         run: echo "::set-output name=dir::$(yarn cache dir)"
 
       - name: Set up Yarn cache
-        uses: actions/cache@v2
+        uses: actions/cache@v2.1.4
         with:
           path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
@@ -61,7 +61,7 @@ jobs:
             ${{ runner.os }}-yarn-
 
       - name: Set up Node cache
-        uses: actions/cache@v2
+        uses: actions/cache@v2.1.4
         id: node-cache # use this to check for `cache-hit` (`steps.node-cache.outputs.cache-hit != 'true'`)
         with:
           path: "**/node_modules"
@@ -70,7 +70,7 @@ jobs:
             ${{ runner.os }}-node-
 
       - name: Set up Crystal cache
-        uses: actions/cache@v2
+        uses: actions/cache@v2.1.4
         id: crystal-cache
         with:
           path: |
