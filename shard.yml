@@ -11,15 +11,20 @@ targets:
 crystal: 0.35.1
 
 dependencies:
-  raven:
-    github: Sija/raven.cr
-    version: ~> 1.9.0
   lucky:
     github: luckyframework/lucky
     version: ~> 0.26.0
-  dotenv:
-    github: gdotdesign/cr-dotenv
-    version: ~> 0.7.0
+  lucky_env:
+    github: luckyframework/lucky_env
+    version: ~> 0.1.0
+  raven:
+    github: Sija/raven.cr
+    version: ~> 1.9.0
+
+development_dependencies:
+  ameba:
+    github: crystal-ameba/ameba
+    branch: master
   lucky_flow:
     github: luckyframework/lucky_flow
     version: ~> 0.7.2
