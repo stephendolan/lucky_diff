@@ -10,10 +10,32 @@ services:
     envs:
       - key: LUCKY_ENV
         scope: RUN_TIME
+        type: GENERAL
         value: production
       - key: NODE_ENV
         scope: RUN_TIME
+        type: GENERAL
         value: production
       - key: APP_DOMAIN
         scope: RUN_TIME
+        type: GENERAL
         value: luckydiff.com
+      - key: SECRET_KEY_BASE
+        scope: RUN_TIME
+        type: SECRET
+        value: EV[1:YYQutJOkfI9Zwa31m8e4EWgLhreWDYKl:+b7CaMZ6SiokyXbTecfhZUU8z8TA2aU+aGxuxT0tZ7M5AOx7C1CK0V+TXFVNMkpArQs3+abqOYgzV1Am]
+      - key: SENTRY_DSN
+        scope: RUN_TIME
+        type: SECRET
+        value: EV[1:E4Q53rAlAjFAS3YWRE+NiQhKNN/arT6l:OQ+5Wzz6qc/LcIHGyma2ynHTeiZyMG1JcREH/rjB/SdD0jYrdV/Z0JUDeYHFQ8bN/By82+J7d7qzVBprkuz/HkpPm/trIJbtyHrxgn7NYtF1qJKClmskoGk=]
+    health_check:
+      initial_delay_seconds: 120
+      period_seconds: 300
+      timeout_seconds: 10
+      success_threshold: 1
+      failure_threshold: 2
+      http_path: /
+domains:
+  - domain: luckydiff.com
+    type: PRIMARY
+    wildcard: false
