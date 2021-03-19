@@ -108,25 +108,3 @@ jobs:
 
       - name: Run tests
         run: crystal spec
-
-  Deploy:
-    runs-on: ubuntu-latest
-    needs: [CheckFormat, RunSpecs]
-    if: github.ref == 'refs/heads/main1234'
-
-    steps:
-      - uses: actions/checkout@v2
-
-      - name: Run Ansible playbook
-        env:
-          ANSIBLE_VAULT_PASSWORD: ${{ secrets.ANSIBLE_VAULT_PASSWORD }}
-          SSH_DEPLOY_PRIVATE_KEY: ${{ secrets.SSH_DEPLOY_PRIVATE_KEY }}
-        run: |
-          mkdir ~/.ssh
-          ssh-keyscan -H ${{secrets.SSH_DEPLOY_SERVER_IP}} > ~/.ssh/known_hosts
-          cd ansible
-          echo "$SSH_DEPLOY_PRIVATE_KEY" > private-ssh-key
-          chmod 600 private-ssh-key
-          echo "$ANSIBLE_VAULT_PASSWORD" > vault-password.txt
-          ansible-galaxy install -r requirements.yml
-          ansible-playbook -i production_hosts.yml code_deploy.yml --vault-password-file vault-password.txt --private-key private-ssh-key

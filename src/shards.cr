@@ -1,7 +1,7 @@
 # Load .env file before any other config or app code
 require "lucky_env"
 
-unless Lucky::Env.production?
+if Lucky::Env.development?
   LuckyEnv.load(".env")
 end
 
