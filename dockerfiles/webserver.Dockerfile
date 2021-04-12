@@ -17,6 +17,7 @@ COPY --from=node_dependencies /tmp_node/node_modules node_modules
 RUN yarn prod
 
 FROM crystallang/crystal:0.36.1-alpine as binary_build
+RUN apk --no-cache add yaml-static
 ENV LUCKY_ENV=production
 WORKDIR /tmp_binary_build
 COPY . .
@@ -25,7 +26,6 @@ COPY --from=webpack_build /tmp_webpack/public public
 RUN crystal build --static --release src/start_server.cr -o /usr/local/bin/lucky-app
 
 FROM alpine
-RUN apk --no-cache add diffutils yaml-static
 ENV LUCKY_ENV=production
 ENV NODE_ENV=production
 WORKDIR /app
