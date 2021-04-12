@@ -14,10 +14,12 @@ on:
 jobs:
   CheckFormat:
     runs-on: ubuntu-latest
-    container:
-      image: crystallang/crystal:0.36.1
     steps:
       - uses: actions/checkout@v2
+
+      - uses: oprypin/install-crystal@v1
+        with:
+          crystal: 0.36.1
 
       - name: Format
         run: crystal tool format --check
@@ -43,18 +45,15 @@ jobs:
 
   RunSpecs:
     runs-on: ubuntu-latest
-    container:
-      image: crystallang/crystal:0.36.1
     env:
       LUCKY_ENV: test
 
     steps:
       - uses: actions/checkout@v2
 
-      - name: Install Chromedriver
-        run: |
-          apt-get update
-          apt-get -yqq install chromium-chromedriver
+      - uses: oprypin/install-crystal@v1
+        with:
+          crystal: 0.36.1
 
       - uses: actions/setup-node@v2.1.5
         with:
