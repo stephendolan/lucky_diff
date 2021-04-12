@@ -55,12 +55,6 @@ jobs:
         with:
           crystal: 0.36.1
 
-      - uses: actions/setup-node@v2.1.5
-        with:
-          node-version: "12.x"
-      - name: "Install yarn"
-        run: npm install -g yarn
-
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
         run: echo "::set-output name=dir::$(yarn cache dir)"
@@ -68,19 +62,8 @@ jobs:
       - name: Set up Yarn cache
         uses: actions/cache@v2
         with:
-          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-yarn-
-
-      - name: Set up Node cache
-        uses: actions/cache@v2
-        id: node-cache # use this to check for `cache-hit` (`steps.node-cache.outputs.cache-hit != 'true'`)
-        with:
           path: "**/node_modules"
-          key: ${{ runner.os }}-node-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
 
       - name: Set up Crystal cache
         uses: actions/cache@v2
@@ -99,7 +82,6 @@ jobs:
         run: shards check || shards install
 
       - name: Install yarn packages
-        if: steps.node-cache.outputs.cache-hit != 'true'
         run: yarn install --frozen-lockfile --no-progress
 
       - name: Compiling assets
