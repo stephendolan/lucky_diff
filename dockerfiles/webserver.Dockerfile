@@ -1,4 +1,4 @@
-FROM crystallang/crystal:latest-alpine as crystal_dependencies
+FROM crystallang/crystal:0.36.1-alpine as crystal_dependencies
 ENV SKIP_LUCKY_TASK_PRECOMPILATION="1"
 WORKDIR /tmp_crystal
 COPY shard.yml shard.lock ./

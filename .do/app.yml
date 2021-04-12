@@ -28,7 +28,3 @@ services:
         scope: RUN_TIME
         type: SECRET
         value: EV[1:E4Q53rAlAjFAS3YWRE+NiQhKNN/arT6l:OQ+5Wzz6qc/LcIHGyma2ynHTeiZyMG1JcREH/rjB/SdD0jYrdV/Z0JUDeYHFQ8bN/By82+J7d7qzVBprkuz/HkpPm/trIJbtyHrxgn7NYtF1qJKClmskoGk=]
-domains:
-  - domain: luckydiff.com
-    type: PRIMARY
-    wildcard: false
