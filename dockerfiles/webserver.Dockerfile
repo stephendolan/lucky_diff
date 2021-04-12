@@ -16,7 +16,7 @@ COPY . .
 COPY --from=node_dependencies /tmp_node/node_modules node_modules
 RUN yarn prod
 
-FROM crystallang/crystal:latest-alpine as binary_build
+FROM crystallang/crystal:0.36.1-alpine as binary_build
 ENV LUCKY_ENV=production
 WORKDIR /tmp_binary_build
 COPY . .
