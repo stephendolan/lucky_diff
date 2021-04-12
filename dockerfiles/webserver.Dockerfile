@@ -25,7 +25,7 @@ COPY --from=webpack_build /tmp_webpack/public public
 RUN crystal build --static --release src/start_server.cr -o /usr/local/bin/lucky-app
 
 FROM alpine
-RUN apk --no-cache add diffutils yaml-dev
+RUN apk --no-cache add diffutils yaml-static
 ENV LUCKY_ENV=production
 ENV NODE_ENV=production
 WORKDIR /app
