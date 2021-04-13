@@ -8,12 +8,12 @@ targets:
   lucky_diff:
     main: src/lucky_diff.cr
 
-crystal: 0.35.1
+crystal: 1.0.0
 
 dependencies:
   lucky:
     github: luckyframework/lucky
-    version: ~> 0.26.0
+    version: ~> 0.27.2
   lucky_env:
     github: luckyframework/lucky_env
     version: ~> 0.1.0
@@ -27,4 +27,4 @@ development_dependencies:
     branch: master
   lucky_flow:
     github: luckyframework/lucky_flow
-    version: ~> 0.7.2
+    version: ~> 0.7.3

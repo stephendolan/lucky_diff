@@ -1,4 +1,4 @@
-FROM crystallang/crystal:0.36.1-alpine as crystal_dependencies
+FROM crystallang/crystal:1.0.0-alpine as crystal_dependencies
 ENV SKIP_LUCKY_TASK_PRECOMPILATION="1"
 WORKDIR /tmp_crystal
 COPY shard.yml shard.lock ./
@@ -16,8 +16,7 @@ COPY . .
 COPY --from=node_dependencies /tmp_node/node_modules node_modules
 RUN yarn prod
 
-FROM crystallang/crystal:0.36.1-alpine as binary_build
-RUN apk --no-cache add yaml-static
+FROM crystallang/crystal:1.0.0-alpine as binary_build
 ENV LUCKY_ENV=production
 WORKDIR /tmp_binary_build
 COPY . .
