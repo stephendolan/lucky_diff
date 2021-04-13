@@ -1,7 +1,5 @@
 # LuckyDiff
 
-Testing
-
 [![Lucky](https://github.com/stephendolan/lucky_diff/actions/workflows/lucky.yml/badge.svg)](https://github.com/stephendolan/lucky_diff/actions/workflows/lucky.yml)
 
 This project compares released versions of [Lucky](https://luckyframework.org) apps. It's heavily inspired by [RailsDiff](http://railsdiff.org). Enjoy!
