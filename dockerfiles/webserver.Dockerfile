@@ -17,6 +17,7 @@ COPY --from=node_dependencies /tmp_node/node_modules node_modules
 RUN yarn prod
 
 FROM crystallang/crystal:1.0.0-alpine as binary_build
+RUN apk --no-cache add yaml-static
 ENV LUCKY_ENV=production
 WORKDIR /tmp_binary_build
 COPY . .
