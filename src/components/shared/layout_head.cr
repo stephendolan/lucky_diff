@@ -12,9 +12,7 @@ class Shared::LayoutHead < BaseComponent
       css_link asset("css/app.css"), data_turbolinks_track: "reload"
       js_link asset("js/app.js"), data_turbolinks_track: "reload", attrs: [:defer]
 
-      if Lucky::Env.production?
-        js_link src: "https://static.cloudflareinsights.com/beacon.min.js", data_cf_beacon: "{'token': '9e300d57b1e34630ad3fc10c3f8be326'}", attrs: [:defer]
-      end
+      inject_analytics
 
       meta name: "turbolinks-cache-control", content: "no-cache"
       meta name: "description", content: site_description
@@ -25,5 +23,9 @@ class Shared::LayoutHead < BaseComponent
 
   private def site_description
     "LuckyDiff provides Lucky Framework developers with easy access to version differences between generated applications, making upgrades a breeze and ensuring you don't leave any great functionality behind."
+  end
+
+  private def inject_analytics
+    script src: "https://perch.luckydiff.com/script.js", data_site: Fathom.settings.site_id
   end
 end
