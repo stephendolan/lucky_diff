@@ -1,10 +1,12 @@
 class Fathom
   Habitat.create do
+    setting domain : String
     setting site_id : String
   end
 end
 
 Fathom.configure do |settings|
+  settings.domain = "perch.luckydiff.com"
   settings.site_id = fathom_site_id_from_env
 end
 

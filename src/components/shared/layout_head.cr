@@ -26,6 +26,6 @@ class Shared::LayoutHead < BaseComponent
   end
 
   private def inject_analytics
-    script src: "https://perch.luckydiff.com/script.js", data_site: Fathom.settings.site_id
+    script src: "https://#{Fathom.settings.domain}/script.js", data_site: Fathom.settings.site_id
   end
 end
