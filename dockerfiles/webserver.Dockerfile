@@ -33,18 +33,11 @@ COPY --from=webpack_build /webpack/public public
 RUN shards build --production --static --release
 RUN mv ./bin/webserver /usr/local/bin/webserver
 
-# Create the release script
-FROM alpine as release_script_build
-RUN echo "#!/bin/sh" >> /usr/local/bin/release
-RUN echo "./webserver" >> /usr/local/bin/release
-RUN chmod +x /usr/local/bin/release
-
 # Serve the application binary
 FROM alpine as webserver
 WORKDIR /app
 RUN apk --no-cache add diffutils
-COPY --from=release_script_build /usr/local/bin/release release
 COPY --from=lucky_tasks_build /usr/local/bin/lucky /usr/local/bin/lucky
 COPY --from=lucky_webserver_build /usr/local/bin/webserver webserver
 COPY --from=webpack_build /webpack/public public
-CMD ["./release"]
+CMD ["./webserver"]
