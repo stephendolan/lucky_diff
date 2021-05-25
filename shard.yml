@@ -5,7 +5,7 @@ authors:
   - Stephen Dolan <stephen@stephencodes.com>
 
 targets:
-  lucky_diff:
+  webserver:
     main: src/lucky_diff.cr
 
 crystal: 1.0.0
