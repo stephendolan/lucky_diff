@@ -9,7 +9,7 @@
     "diff2html": "^3.4.7",
     "postcss": "^8.3.5",
     "stimulus": "^2.0.0",
-    "tailwindcss": "^2.2.4",
+    "tailwindcss": "^2.2.6",
     "turbolinks": "^5.2.0"
   },
   "scripts": {
