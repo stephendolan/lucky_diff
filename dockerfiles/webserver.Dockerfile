@@ -37,6 +37,7 @@ RUN mv ./bin/webserver /usr/local/bin/webserver
 FROM alpine as webserver
 WORKDIR /app
 RUN apk --no-cache add diffutils
+COPY generated generated
 COPY --from=lucky_tasks_build /usr/local/bin/lucky /usr/local/bin/lucky
 COPY --from=lucky_webserver_build /usr/local/bin/webserver webserver
 COPY --from=webpack_build /webpack/public public
