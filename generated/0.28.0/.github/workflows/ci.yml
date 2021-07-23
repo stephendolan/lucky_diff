@@ -10,7 +10,7 @@ jobs:
   check-format:
     runs-on: ubuntu-latest
     container:
-      image: crystallang/crystal:1.0.0
+      image: crystallang/crystal:1.1.0
     steps:
       - uses: actions/checkout@v2
       - name: Format
@@ -19,7 +19,7 @@ jobs:
   specs:
     runs-on: ubuntu-latest
     container:
-      image: crystallang/crystal:1.0.0
+      image: crystallang/crystal:1.1.0
     env:
       LUCKY_ENV: test
       DB_HOST: postgres

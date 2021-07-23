@@ -8,7 +8,7 @@ targets:
   my_app:
     main: src/my_app.cr
 
-crystal: 1.0.0
+crystal: 1.1.0
 
 dependencies:
   lucky:
