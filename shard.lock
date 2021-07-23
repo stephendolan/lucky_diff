@@ -38,7 +38,7 @@ shards:
 
   future:
     git: https://github.com/crystal-community/future.cr.git
-    version: 1.0.0+git.commit.9fe168418c6884cb3552c13b004763eb4815ceb9
+    version: 1.0.0
 
   habitat:
     git: https://github.com/luckyframework/habitat.git
@@ -86,7 +86,7 @@ shards:
 
   teeplate:
     git: https://github.com/luckyframework/teeplate.git
-    version: 0.8.3
+    version: 0.8.4
 
   webdrivers:
     git: https://github.com/matthewmcgarvey/webdrivers.cr.git
