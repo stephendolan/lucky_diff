@@ -13,7 +13,7 @@ class Home::Index < BrowserAction
   # Because we store scaffolded apps in different directories, we remove
   # those details to avoid every file getting the "Renamed" designation.
   private def sanitize_diff(diff)
-    diff.gsub(/\S+\/generated\/(#{from}|#{to})/, "app")
+    diff.gsub(/\S+\/generated\/(#{from}|#{to})\//, "")
   end
 
   private def full_path(version)
