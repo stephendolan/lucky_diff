@@ -6,7 +6,7 @@ class Home::Index < BrowserAction
     if Version.valid?(params.get?(:from)) && Version.valid?(params.get?(:to))
       html Versions::ComparePage, diff: sanitize_diff(version_diff), from: from, to: to
     else
-      redirect to: Home::Index.with(from, to)
+      redirect to: Home::Index.with(Version.default_from, Version.default_to)
     end
   end
 
