@@ -8,8 +8,14 @@ This project compares released versions of [Lucky](https://luckyframework.org) a
 
 All supported versions are placed in the [generated](/generated/) folder, so adding a new version is as simple as following these steps:
 
-1. Scaffold a new app with the appropriate Lucky version and standard app name: `lucky init.custom my_app`
-1. Move the generated app to the `/generated/` folder, named after the version
+1. Fork it ( https://github.com/stephendolan/lucky_diff/fork )
+1. Check out a new branch (git checkout -b add-version-x-x-x)
+1. Run `./script/create_new_version vx.x.x`
+1. Add your new version to `src/models/version.cr`
+1. Run the server with `lucky dev` and verify the content
+1. Commit your changes (git commit -am 'Add version x.x.x')
+1. Push to the branch (git push origin add-version-x-x-x)
+1. Create a new Pull Request
 
 ## Want to add something to the site?
 
