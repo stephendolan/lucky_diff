@@ -7,8 +7,8 @@ require("@rails/ujs").start();
 // Turbolinks is optional. Learn more: https://github.com/turbolinks/turbolinks/
 require("turbolinks").start();
 
-import { Application } from "stimulus";
-import { definitionsFromContext } from "stimulus/webpack-helpers";
+import { Application } from "@hotwired/stimulus";
+import { definitionsFromContext } from "@hotwired/stimulus-webpack-helpers";
 
 const application = Application.start();
 const context = require.context("./controllers", true, /\.ts$/);

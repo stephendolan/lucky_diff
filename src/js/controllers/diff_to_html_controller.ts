@@ -1,4 +1,4 @@
-import { Controller } from "stimulus";
+import { Controller } from "@hotwired/stimulus";
 import * as Diff2Html from "diff2html";
 
 export default class extends Controller {
