@@ -15,7 +15,7 @@ jobs:
   CheckFormat:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2.3.5
+      - uses: actions/checkout@v2.4.0
 
       - uses: oprypin/install-crystal@v1
         with:
@@ -49,7 +49,7 @@ jobs:
       LUCKY_ENV: test
 
     steps:
-      - uses: actions/checkout@v2.3.5
+      - uses: actions/checkout@v2.4.0
 
       - uses: oprypin/install-crystal@v1
         with:
