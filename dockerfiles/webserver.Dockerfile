@@ -7,11 +7,11 @@ COPY shard.yml shard.lock ./
 RUN  shards install --production
 
 # Install the application Yarn dependencies, then compile production CSS/JS
-FROM node:alpine as webpack_build
+FROM node:16-alpine as webpack_build
 WORKDIR /webpack
 COPY . .
-RUN npm install
-RUN npm run prod
+RUN yarn install
+RUN yarn run prod
 
 # Build the Lucky tasks binary
 FROM crystallang/crystal:1.0.0-alpine as lucky_tasks_build
