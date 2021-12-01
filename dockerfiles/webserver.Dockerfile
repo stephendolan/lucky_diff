@@ -10,8 +10,8 @@ RUN  shards install --production
 FROM node:alpine as webpack_build
 WORKDIR /webpack
 COPY . .
-RUN yarn install
-RUN yarn run prod
+RUN npm install
+RUN npm run prod
 
 # Build the Lucky tasks binary
 FROM crystallang/crystal:1.0.0-alpine as lucky_tasks_build
