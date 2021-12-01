@@ -12,6 +12,7 @@ class Version
     "0.26.0",
     "0.27.2",
     "0.28.0",
+    "0.29.0",
   ]
 
   def self.valid?(version)
