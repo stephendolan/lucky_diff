@@ -19,7 +19,7 @@ jobs:
 
       - uses: oprypin/install-crystal@v1
         with:
-          crystal: 1.0.0
+          crystal: 1.2.2
 
       - name: Format
         run: crystal tool format --check
@@ -53,7 +53,7 @@ jobs:
 
       - uses: oprypin/install-crystal@v1
         with:
-          crystal: 1.0.0
+          crystal: 1.2.2
 
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
