@@ -8,7 +8,6 @@ class Shared::LayoutHead < BaseComponent
       utf8_charset
       title ["LuckyDiff", (@page_title.empty? ? nil : @page_title)].compact.join(" - ")
       css_link href: "https://rsms.me/inter/inter.css", data_turbolinks_track: "reload"
-      css_link href: "https://cdn.jsdelivr.net/npm/diff2html/bundles/css/diff2html.min.css", data_turbolinks_track: "reload"
       css_link asset("css/app.css"), data_turbolinks_track: "reload"
       js_link asset("js/app.js"), data_turbolinks_track: "reload", attrs: [:defer]
 

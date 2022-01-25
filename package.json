@@ -9,6 +9,7 @@
     "@tailwindcss/forms": "^0.3.4",
     "@tailwindcss/typography": "^0.4.1",
     "diff2html": "^3.4.14",
+    "highlight.js": "^11.4.0",
     "postcss": "^8.4.5",
     "tailwindcss": "^2.2.19",
     "turbolinks": "^5.2.0"
