@@ -8,7 +8,7 @@
     "@tailwindcss/aspect-ratio": "^0.4.0",
     "@tailwindcss/forms": "^0.3.4",
     "@tailwindcss/typography": "^0.4.1",
-    "diff2html": "^3.4.15",
+    "diff2html": "^3.4.16",
     "highlight.js": "^11.4.0",
     "postcss": "^8.4.6",
     "tailwindcss": "^2.2.19",
