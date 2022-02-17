@@ -54,13 +54,13 @@ class Versions::ComparePage < MainLayout
   end
 
   def compare_button
-    button_color = "bg-green-500 hover:bg-green-600"
+    button_color = "bg-primary-500 hover:bg-primary-600"
     submit "Compare",
       class: "w-full py-1 mt-2 rounded shadow font-semibold cursor-pointer text-white #{button_color}"
   end
 
   def commit_log_button
-    button_color = "bg-green-500 hover:bg-green-600"
+    button_color = "bg-primary-500 hover:bg-primary-600"
     link to: Commits::Index.with(from: from, to: to), class: "w-full py-1 px-4 hidden sm:flex items-center rounded shadow font-semibold cursor-pointer text-sm text-white #{button_color}" do
       tag "svg", class: "h-5 w-5 mr-1.5", fill: "currentColor", viewbox: "0 0 20 20", xmlns: "http://www.w3.org/2000/svg" do
         tag "path", d: "M7 3a1 1 0 000 2h6a1 1 0 100-2H7zM4 7a1 1 0 011-1h10a1 1 0 110 2H5a1 1 0 01-1-1zM2 11a2 2 0 012-2h12a2 2 0 012 2v4a2 2 0 01-2 2H4a2 2 0 01-2-2v-4z"
