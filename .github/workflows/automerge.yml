@@ -1,9 +1,11 @@
 name: Auto-merge
 
 on:
-  check_suite:
+  workflow_run:
     types:
       - completed
+    workflows:
+      - 'Lucky'
 
 jobs:
   auto_merge:
