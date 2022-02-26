@@ -1,91 +1,14 @@
-name: Lucky
+name: Lucky App CI
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - main
   pull_request:
-    branches:
-      - "*"
   schedule:
     - cron: "30 2 * * *"
-  workflow_dispatch:
 
 jobs:
-  CheckFormat:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2.4.0
-
-      - uses: oprypin/install-crystal@v1
-        with:
-          crystal: 1.2.2
-
-      - name: Format
-        run: crystal tool format --check
-
-      - name: Set up Crystal cache
-        uses: actions/cache@v2.1.7
-        id: crystal-cache
-        with:
-          path: |
-            ~/.cache/crystal
-            bin/ameba
-            lib
-          key: ${{ runner.os }}-crystal-${{ hashFiles('**/shard.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-crystal-
-
-      - name: Install shards
-        if: steps.crystal-cache.outputs.cache-hit != 'true'
-        run: shards check || shards install
-
-      - name: Run ameba linter
-        run: ./bin/ameba
-
-  RunSpecs:
-    runs-on: ubuntu-latest
-    env:
-      LUCKY_ENV: test
-
-    steps:
-      - uses: actions/checkout@v2.4.0
-
-      - uses: oprypin/install-crystal@v1
-        with:
-          crystal: 1.2.2
-
-      - name: Get yarn cache directory path
-        id: yarn-cache-dir-path
-        run: echo "::set-output name=dir::$(yarn cache dir)"
-
-      - name: Set up Yarn cache
-        uses: actions/cache@v2.1.7
-        with:
-          path: "**/node_modules"
-          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
-
-      - name: Set up Crystal cache
-        uses: actions/cache@v2.1.7
-        id: crystal-cache
-        with:
-          path: |
-            ~/.cache/crystal
-            lib
-            lucky_tasks
-          key: ${{ runner.os }}-crystal-${{ hashFiles('**/shard.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-crystal-
-
-      - name: Install shards
-        if: steps.crystal-cache.outputs.cache-hit != 'true'
-        run: shards check || shards install
-
-      - name: Install yarn packages
-        run: yarn install --frozen-lockfile --no-progress
-
-      - name: Compiling assets
-        run: yarn prod
-
-      - name: Run tests
-        run: crystal spec
+  ci:
+    uses: stephendolan/lucky_jumpstart/.github/workflows/lucky.yml@v1.0.0
