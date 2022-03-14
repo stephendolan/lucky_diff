@@ -24,7 +24,7 @@
     "@babel/compat-data": "^7.17.0",
     "@types/node": "^17.0.21",
     "@types/webpack-env": "^1.16.3",
-    "browser-sync": "^2.27.7",
+    "browser-sync": "^2.27.8",
     "compression-webpack-plugin": "^9.2.0",
     "laravel-mix": "^6.0.43",
     "prettier": "^2.5.1",
