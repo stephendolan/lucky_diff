@@ -1,4 +1,4 @@
-name: Auto-merge
+name: Deploy
 
 on:
   workflow_dispatch:
@@ -9,6 +9,7 @@ on:
       - 'Lucky App CI'
 
 jobs:
-  automerge:
+  deploy:
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
-    uses: stephendolan/lucky_jumpstart/.github/workflows/automerge.yml@v1.0.0
+    run: |
+      curl ${{ secrets.RENDER_DEPLOY_HOOK }}
