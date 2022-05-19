@@ -22,7 +22,7 @@ class Home::Index < BrowserAction
 
   private def version_diff
     tempfile = File.tempname("diff_output", ".diff")
-    system "diff #{ignore_flags} -Nr -U #{context_lines} #{full_path(from)} #{full_path(to)} > #{tempfile}"
+    system "diff #{ignore_flags} #{whitespace_flags} -Nr -U #{context_lines} #{full_path(from)} #{full_path(to)} > #{tempfile}"
     File.read(tempfile)
   ensure
     File.delete(tempfile) if tempfile
@@ -30,6 +30,13 @@ class Home::Index < BrowserAction
 
   private def context_lines
     20
+  end
+
+  private def whitespace_flags
+    %w[
+      --ignore-space-change
+      --ignore-tab-expansion
+    ].join(" ")
   end
 
   private def ignore_flags
