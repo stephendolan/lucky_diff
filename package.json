@@ -7,7 +7,7 @@
     "@rails/ujs": "^7.0.3",
     "@tailwindcss/aspect-ratio": "^0.4.0",
     "@tailwindcss/forms": "^0.5.2",
-    "@tailwindcss/typography": "^0.5.2",
+    "@tailwindcss/typography": "^0.5.3",
     "diff2html": "^3.4.17",
     "highlight.js": "^11.5.1",
     "postcss": "^8.4.14",
