@@ -8,7 +8,7 @@ targets:
   webserver:
     main: src/lucky_diff.cr
 
-crystal: 1.2.2
+crystal: 1.5.0
 
 dependencies:
   lucky:

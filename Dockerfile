@@ -1,4 +1,4 @@
-FROM crystallang/crystal:1.3.2-alpine as crystal_dependencies
+FROM crystallang/crystal:1.5-alpine as crystal_dependencies
 ENV LUCKY_ENV=production
 ENV SKIP_LUCKY_TASK_PRECOMPILATION=1
 WORKDIR /shards
@@ -11,7 +11,7 @@ COPY . .
 RUN yarn install
 RUN yarn prod
 
-FROM crystallang/crystal:1.3.2-alpine as lucky_tasks_build
+FROM crystallang/crystal:1.5-alpine as lucky_tasks_build
 ENV LUCKY_ENV=production
 RUN apk --no-cache add yaml-static
 COPY . .
@@ -19,7 +19,7 @@ COPY --from=crystal_dependencies /shards/lib lib
 COPY --from=asset_build /assets/public public
 RUN crystal build --static --release tasks.cr -o /usr/local/bin/lucky
 
-FROM crystallang/crystal:1.3.2-alpine as lucky_webserver_build
+FROM crystallang/crystal:1.5-alpine as lucky_webserver_build
 WORKDIR /webserver_build
 RUN apk --no-cache add yaml-static coreutils
 ENV LUCKY_ENV=production
