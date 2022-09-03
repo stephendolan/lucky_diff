@@ -5,7 +5,7 @@
     "@hotwired/stimulus": "^3.1.0",
     "@hotwired/stimulus-webpack-helpers": "^1.0.1",
     "@rails/ujs": "^7.0.3",
-    "@tailwindcss/aspect-ratio": "^0.4.1",
+    "@tailwindcss/aspect-ratio": "^0.4.2",
     "@tailwindcss/forms": "^0.5.3",
     "@tailwindcss/typography": "^0.5.4",
     "diff2html": "^3.4.19",
