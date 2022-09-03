@@ -21,7 +21,7 @@
     "prod": "mix --production"
   },
   "devDependencies": {
-    "@babel/compat-data": "^7.18.8",
+    "@babel/compat-data": "^7.18.13",
     "@types/node": "^18.7.5",
     "@types/webpack-env": "^1.17.0",
     "browser-sync": "^2.27.10",
