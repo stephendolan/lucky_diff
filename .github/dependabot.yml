@@ -11,5 +11,7 @@ updates:
     directory: "/"
     schedule:
       interval: "daily"
+    ignore:
+      dependency-name: @types/*
     target-branch: main
     versioning-strategy: increase
