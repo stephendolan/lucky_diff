@@ -8,15 +8,15 @@ targets:
   webserver:
     main: src/lucky_diff.cr
 
-crystal: 1.5.0
+crystal: 1.4.1
 
 dependencies:
   lucky:
     github: luckyframework/lucky
-    version: ~> 0.27.2
+    version: ~> 0.30.0
   lucky_env:
     github: luckyframework/lucky_env
-    version: ~> 0.1.0
+    version: ~> 0.1.4
   raven:
     github: Sija/raven.cr
     version: ~> 1.9.0

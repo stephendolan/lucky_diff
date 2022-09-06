@@ -4,8 +4,6 @@ class Shared::Navbar < BaseComponent
       link "LuckyDiff", to: logo_link, class: "my-auto font-semibold text-2xl #{link_color}"
 
       div class: "flex space-x-8" do
-        link "About", to: About::Index, class: "my-auto font-semibold text-lg #{link_color}"
-
         a href: github_link, target: "_blank", class: "h-8 w-8 #{link_color}" do
           github_logo
         end

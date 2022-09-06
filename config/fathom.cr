@@ -12,7 +12,7 @@ end
 
 # Only require this ENV var in production.
 private def fathom_site_id_from_env
-  return "UNUSED" unless Lucky::Env.production?
+  return "UNUSED" unless LuckyEnv.production?
 
   ENV["FATHOM_SITE_ID"]? || raise_missing_key_message
 end
