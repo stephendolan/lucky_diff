@@ -7,9 +7,21 @@ require("@rails/ujs").start();
 // Turbolinks is optional. Learn more: https://github.com/turbolinks/turbolinks/
 require("turbolinks").start();
 
-import { Application } from "@hotwired/stimulus";
-import { definitionsFromContext } from "@hotwired/stimulus-webpack-helpers";
+// If using Turbolinks, you can attach events to page load like this:
+//
+// document.addEventListener("turbolinks:load", function() {
+//   ...
+// })
 
-const application = Application.start();
-const context = require.context("./controllers", true, /\.ts$/);
-application.load(definitionsFromContext(context));
+import { Application } from "@hotwired/stimulus";
+
+import DiffToHtmlController from "./controllers/diff_to_html_controller";
+
+declare global {
+  interface Window {
+    Stimulus: any;
+  }
+}
+
+let Stimulus = (window.Stimulus = Application.start());
+Stimulus.register("diff-to-html", DiffToHtmlController);

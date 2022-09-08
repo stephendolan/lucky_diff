@@ -3,12 +3,13 @@
   "private": true,
   "dependencies": {
     "@hotwired/stimulus": "^3.1.0",
-    "@hotwired/stimulus-webpack-helpers": "^1.0.1",
     "@rails/ujs": "^7.0.3",
     "@tailwindcss/aspect-ratio": "^0.4.2",
     "@tailwindcss/forms": "^0.5.3",
     "@tailwindcss/typography": "^0.5.7",
+    "autoprefixer": "^10.4.8",
     "diff2html": "^3.4.19",
+    "esbuild": "^0.15.7",
     "highlight.js": "^11.6.0",
     "postcss": "^8.4.16",
     "tailwindcss": "^3.1.8",
@@ -16,20 +17,19 @@
   },
   "scripts": {
     "heroku-postbuild": "yarn prod",
-    "dev": "mix",
-    "watch": "mix watch",
-    "prod": "mix --production"
+    "build:js": "esbuild src/js/app.ts --bundle --sourcemap=inline --target=es2016 --outfile=public/js/app.js",
+    "build:css": "tailwindcss --postcss --input=src/css/app.css --output=public/css/app.css",
+    "watch:js": "esbuild src/js/app.ts --bundle --watch --sourcemap=inline --target=es2016 --outfile=public/js/app.js",
+    "watch:css": "tailwindcss --postcss --watch --input=src/css/app.css --output=public/css/app.css",
+    "prod:js": "esbuild src/js/app.ts --bundle --minify --sourcemap=inline --target=es2016 --outfile=public/js/app.js",
+    "prod:css": "tailwindcss --postcss --minify --input=src/css/app.css --output=public/css/app.css",
+    "prod": "yarn prod:js && yarn prod:css"
   },
   "devDependencies": {
-    "@babel/compat-data": "^7.19.0",
     "@types/node": "^18.7.15",
-    "@types/webpack-env": "^1.17.0",
     "browser-sync": "^2.27.10",
-    "compression-webpack-plugin": "^10.0.0",
-    "laravel-mix": "^6.0.49",
     "prettier": "^2.7.1",
     "resolve-url-loader": "5.0.0",
-    "ts-loader": "^9.3.1",
     "typescript": "^4.8.2"
   }
 }
