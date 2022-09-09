@@ -41,4 +41,6 @@ COPY generated generated
 COPY --from=lucky_tasks_build /usr/local/bin/lucky /usr/local/bin/lucky
 COPY --from=lucky_webserver_build /usr/local/bin/webserver webserver
 COPY --from=asset_build /asset/public public
+
+ENV PORT 8080
 CMD ["./webserver"]
