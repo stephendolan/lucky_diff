@@ -9,7 +9,9 @@ class Shared::LayoutHead < BaseComponent
       css_link asset("css/app.css"), data_turbolinks_track: "reload"
       js_link asset("js/app.js"), data_turbolinks_track: "reload", attrs: [:defer]
 
-      inject_analytics
+      if LuckyEnv.production?
+        inject_analytics
+      end
 
       meta name: "turbolinks-cache-control", content: "no-cache"
       meta name: "description", content: site_description
