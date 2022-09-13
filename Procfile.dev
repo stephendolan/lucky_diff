@@ -1,4 +1,4 @@
 system_check: script/system_check && sleep 100000
 web: lucky watch --reload-browser
-js_assets: yarn watch:js
-css_assets: yarn watch:css
+js_assets: yarn build:js && yarn watch:js
+css_assets: yarn build:css & yarn watch:css
