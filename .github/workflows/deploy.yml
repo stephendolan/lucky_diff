@@ -5,14 +5,18 @@ on:
   workflow_run:
     types:
       - completed
+    branches:
+      - main
     workflows:
       - 'Lucky App CI'
 
 jobs:
   deploy:
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    env:
+      FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
     runs-on: ubuntu-20.04
     steps:
-      - name: Trigger Render.com deploy
-        run: |
-          curl ${{ secrets.RENDER_DEPLOY_HOOK }}
+      - uses: actions/checkout@v2
+      - uses: superfly/flyctl-actions/setup-flyctl@master
+      - run: flyctl deploy --remote-only
