@@ -10,7 +10,7 @@ die() {
 }
 
 [ "$#" -eq 1 ] || die "Must provide Lucky version as an argument (i.e. 'v1.0.0'), $# arguments provided"
-echo $1 | grep -E -q '^v[0-9.]+$' || die "Version argument required (i.e. 'v1.0.0'), '$1' provided"
+echo $1 | grep -E -q '^v[0-9.rc-]+$' || die "Version argument required (i.e. 'v1.0.0'), '$1' provided"
 
 VERSION=$1
 CLI_BINARY="lucky_cli_$VERSION"
