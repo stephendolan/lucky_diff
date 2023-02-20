@@ -11,4 +11,4 @@ on:
 
 jobs:
   ci:
-    uses: stephendolan/lucky_jumpstart/.github/workflows/lucky.yml@main
+    uses: stephendolan/lucky_jumpstart/.github/workflows/lucky.yml@v1.1.0
