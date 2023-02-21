@@ -9,7 +9,7 @@
     "@tailwindcss/typography": "^0.5.7",
     "autoprefixer": "^10.4.12",
     "diff2html": "^3.4.19",
-    "esbuild": "^0.15.10",
+    "esbuild": "^0.17.10",
     "highlight.js": "^11.6.0",
     "postcss": "^8.4.17",
     "tailwindcss": "^3.1.8",
