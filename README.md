@@ -17,6 +17,7 @@ All supported versions are placed in the [generated](/generated/) folder, so add
 1. Commit your changes (git commit -am 'Add version x.x.x')
 1. Push to the branch (git push origin add-version-x-x-x)
 1. Create a new Pull Request
+1. Once the pull request is merged, manually run the Deploy action
 
 ## Want to add something to the site?
 
