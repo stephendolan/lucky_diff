@@ -16,7 +16,8 @@ class Home::Index < BrowserAction
   private def sanitize_diff(diff)
     diff
       .gsub(/\S+\/generated\/(#{from}|#{to})\//, "")
-      .gsub(/(\s+\d{4}-\d{2}-\d{2}\s+\d{2}:\d{2}:\d{2})/, "")
+      .gsub(/(\s+\d{4}-\d{2}-\d{2}\s+\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:\s+[+-]\d{4})?)/, "")
+      .gsub(/(\.\d{9}\s+[+-]\d{4})/, "")
   end
 
   private def full_path(version)
