@@ -9,7 +9,7 @@ end
 
 app_server = AppServer.new
 
-Process.on_terminate do
+Signal::INT.trap do
   app_server.close
 end
 
