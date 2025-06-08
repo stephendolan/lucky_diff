@@ -13,11 +13,11 @@ class GitHub::TagComparison
     end
 
     page = 1
-    tag_comparison = self.fetch_batch(client, base_tag, head_tag, page)
+    tag_comparison = fetch_batch(client, base_tag, head_tag, page)
 
     while tag_comparison.commits.size < tag_comparison.total_commits
       page += 1
-      next_batch = self.fetch_batch(client, base_tag, head_tag, page)
+      next_batch = fetch_batch(client, base_tag, head_tag, page)
       tag_comparison.commits += next_batch.commits
     end
 
@@ -28,6 +28,6 @@ class GitHub::TagComparison
     params = URI::Params.encode({page: page.to_s, per_page: per_page.to_s})
     response = client.get "/repos/luckyframework/lucky/compare/#{base_tag}...#{head_tag}?#{params}"
 
-    self.from_json(response.body)
+    from_json(response.body)
   end
 end

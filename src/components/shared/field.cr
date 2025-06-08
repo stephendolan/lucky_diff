@@ -29,13 +29,10 @@
 # different in different parts of your app, e.g. `CompactField` or
 # `InlineTextField`
 class Shared::Field(T) < BaseComponent
-  # Raises a helpful error if component receives an unpermitted attribute
-  include Lucky::CatchUnpermittedAttribute
-
   needs attribute : Avram::PermittedAttribute(T)
   needs label_text : String?
 
-  def render
+  def render(&)
     label_for attribute, label_text
 
     # You can add more default options here. For example:

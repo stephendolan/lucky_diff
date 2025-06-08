@@ -1,2 +1,22 @@
+# Ameba configuration for Lucky framework project
+# Updated for Crystal 1.16.3 and Lucky 1.4.0
+
+# List of excluded globs
 Excluded:
   - generated
+  - lib
+
+# Disable specific rules that conflict with Lucky patterns
+Lint/UselessAssign:
+  # Lucky's `needs` declarations are type declarations, not assignments
+  # This option excludes them while still checking actual variable assignments
+  ExcludeTypeDeclarations: true
+
+Style/HeredocIndent:
+  # Disable heredoc indentation checks as they conflict with some Lucky patterns
+  Enabled: false
+
+Lint/SpecFilename:
+  # spec/setup/ files are not specs, they're setup files
+  Excluded:
+    - spec/setup/*.cr

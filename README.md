@@ -5,6 +5,10 @@
 
 This project compares released versions of [Lucky](https://luckyframework.org) apps. It's heavily inspired by [RailsDiff](http://railsdiff.org). Enjoy!
 
+## Requirements
+
+- Crystal 1.16.3 or higher
+
 ## Is a version you need missing?
 
 All supported versions are placed in the [generated](/generated/) folder, so adding a new version is as simple as following these steps:

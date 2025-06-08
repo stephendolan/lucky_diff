@@ -2,6 +2,8 @@ ENV["LUCKY_ENV"] = "test"
 ENV["DEV_PORT"] = "5001"
 require "spec"
 require "lucky_flow"
+require "lucky_flow/ext/lucky"
+require "lucky_flow/ext/avram"
 require "../src/app"
 require "./support/flows/base_flow"
 require "./support/**"
@@ -17,6 +19,7 @@ include Lucky::RequestExpectations
 include LuckyFlow::Expectations
 
 Habitat.raise_if_missing_settings!
+Avram::SchemaEnforcer.ensure_correct_column_mappings!
 
 # Added to ensure LuckyFlow has something to use by default
 class User

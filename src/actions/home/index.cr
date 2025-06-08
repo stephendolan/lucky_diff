@@ -12,8 +12,11 @@ class Home::Index < BrowserAction
 
   # Because we store scaffolded apps in different directories, we remove
   # those details to avoid every file getting the "Renamed" designation.
+  # We also remove timestamps to prevent files from appearing as renamed.
   private def sanitize_diff(diff)
-    diff.gsub(/\S+\/generated\/(#{from}|#{to})\//, "")
+    diff
+      .gsub(/\S+\/generated\/(#{from}|#{to})\//, "")
+      .gsub(/(\s+\d{4}-\d{2}-\d{2}\s+\d{2}:\d{2}:\d{2})/, "")
   end
 
   private def full_path(version)
@@ -33,10 +36,17 @@ class Home::Index < BrowserAction
   end
 
   private def whitespace_flags
-    %w[
-      --ignore-space-change
-      --ignore-tab-expansion
-    ].join(" ")
+    if LuckyEnv.production?
+      # Production on Linux/Alpine has GNU diff
+      %w[
+        --ignore-space-change
+        --ignore-tab-expansion
+      ].join(" ")
+    else
+      # Development on macOS has BSD diff
+      # -b is equivalent to --ignore-space-change
+      "-b"
+    end
   end
 
   private def ignore_flags

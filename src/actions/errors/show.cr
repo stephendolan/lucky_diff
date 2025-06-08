@@ -21,9 +21,9 @@ class Errors::Show < Lucky::ErrorAction
       error_html DEFAULT_MESSAGE, status: 500
     else
       error_json \
-        message: error.renderable_message,
-        details: error.renderable_details,
-        param: error.invalid_attribute_name,
+        message: error.message || DEFAULT_MESSAGE,
+        details: error.errors.to_s,
+        param: nil,
         status: 400
     end
   end

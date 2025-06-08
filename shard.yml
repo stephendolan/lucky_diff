@@ -8,15 +8,21 @@ targets:
   webserver:
     main: src/lucky_diff.cr
 
-crystal: 1.5.0
+crystal: ">= 1.16.0"
 
 dependencies:
   lucky:
     github: luckyframework/lucky
-    version: ~> 0.30.0
+    version: ~> 1.4.0
+  avram:
+    github: luckyframework/avram
+    version: ~> 1.4.0
   lucky_env:
     github: luckyframework/lucky_env
-    version: ~> 0.1.4
+    version: ~> 0.3.0
+  lucky_task:
+    github: luckyframework/lucky_task
+    version: ~> 0.3.0
   raven:
     github: Sija/raven.cr
     version: ~> 1.9.0
@@ -24,7 +30,7 @@ dependencies:
 development_dependencies:
   ameba:
     github: crystal-ameba/ameba
-    version: ~> 1.1.0
+    branch: master
   lucky_flow:
     github: luckyframework/lucky_flow
-    version: ~> 0.7.3
+    version: ~> 0.10.0
