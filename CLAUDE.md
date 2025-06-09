@@ -107,13 +107,29 @@ bin/ameba --fix  # Auto-fix correctable issues
 - The webdrivers shard automatically downloads matching chromedriver
 - If version mismatch occurs, delete `~/.webdrivers/` to force re-download
 
+### Testing Strategy
+- **Flow Tests** (`spec/flows/`): Used for end-to-end browser testing with LuckyFlow
+  - Test user interactions and full page behavior
+  - Require a browser to be installed
+  - Use `VersionCompareFlow` helper class for common interactions
+- **Unit Tests** (`spec/pages/`, `spec/models/`, etc.): Used for testing specific logic
+  - Can test page rendering logic without full HTTP context
+  - Good for testing regex patterns, calculations, and other pure functions
+  - Don't require a browser
+- **API Client**: Use `ApiClient` (not `AppClient`) for making HTTP requests in tests
+- **Test Helpers**: Located in `spec/support/` directory
+
 ### Common Issues
 - **macOS diff**: The app uses GNU diff options not available on macOS (e.g., `--ignore-tab-expansion`)
 - **Browser requirement**: Flow tests need an actual browser, not just the driver
 - **Ameba false positives**: Configure `.ameba.yml` to disable `Lint/UselessAssign` for Lucky's `needs` macro
+- **Regex multiline mode**: When scanning multi-line strings in Crystal, use the `m` flag (e.g., `/^pattern/m`) to make `^` match line beginnings, not just string beginning
 
 ### Key Implementation Details
 - The app compares two versions by running `diff` on their respective directories
 - Diff output is sanitized to remove directory paths for cleaner display
 - Version validation ensures only existing versions can be compared
 - GitHub API integration fetches commit information between version tags
+
+### Development Tips
+- When testing functionality, remember that you should use `lucky dev` to run the dev server and view compiler errors/issues

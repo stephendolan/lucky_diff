@@ -1,12 +1,13 @@
 class Home::Index < BrowserAction
   param from : String = Version.default_from
   param to : String = Version.default_to
+  param mode : String = "unified"
 
   get "/" do
     if Version.valid?(params.get?(:from)) && Version.valid?(params.get?(:to))
-      html Versions::ComparePage, diff: sanitize_diff(version_diff), from: from, to: to
+      html Versions::ComparePage, diff: sanitize_diff(version_diff), from: from, to: to, view_mode: mode
     else
-      redirect to: Home::Index.with(Version.default_from, Version.default_to)
+      redirect to: Home::Index.with(from: Version.default_from, to: Version.default_to, mode: "unified")
     end
   end
 
@@ -26,7 +27,8 @@ class Home::Index < BrowserAction
 
   private def version_diff
     tempfile = File.tempname("diff_output", ".diff")
-    system "diff #{ignore_flags} #{whitespace_flags} -Nr -U #{context_lines} #{full_path(from)} #{full_path(to)} > #{tempfile}"
+    # Use --color=never to ensure no color codes in output
+    system "diff --color=never #{ignore_flags} #{whitespace_flags} -Nr -U #{context_lines} #{full_path(from)} #{full_path(to)} > #{tempfile}"
     File.read(tempfile)
   ensure
     File.delete(tempfile) if tempfile

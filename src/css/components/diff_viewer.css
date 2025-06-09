@@ -1,0 +1,311 @@
+/* Modern diff viewer styles */
+
+/* Main container */
+.d2h-wrapper {
+  @apply rounded-lg shadow-lg bg-white border border-gray-200 overflow-hidden;
+}
+
+/* File wrapper */
+.d2h-file-wrapper {
+  @apply border-0 mb-6 rounded-lg overflow-hidden shadow-sm;
+}
+
+/* File header */
+.d2h-file-header {
+  @apply bg-gradient-to-r from-gray-50 to-gray-100 px-4 py-3 font-mono text-sm border-b border-gray-200;
+}
+
+/* File name */
+.d2h-file-name {
+  @apply text-gray-800 font-medium;
+}
+
+/* Diff table */
+.d2h-diff-table {
+  @apply font-mono text-sm;
+}
+
+/* Code lines */
+.d2h-code-line {
+  @apply px-3 py-0.5;
+}
+
+/* Line numbers */
+.d2h-code-linenumber {
+  @apply bg-gray-50 text-gray-500 text-xs px-2 select-none border-r border-gray-200;
+  min-width: 50px;
+}
+
+/* Addition lines */
+.d2h-ins {
+  @apply bg-emerald-50;
+}
+
+.d2h-ins .d2h-code-line-prefix {
+  @apply text-emerald-600;
+}
+
+.d2h-ins .d2h-code-line-ctn {
+  @apply text-emerald-900;
+}
+
+/* Deletion lines */
+.d2h-del {
+  @apply bg-red-50;
+}
+
+.d2h-del .d2h-code-line-prefix {
+  @apply text-red-600;
+}
+
+.d2h-del .d2h-code-line-ctn {
+  @apply text-red-900;
+}
+
+/* Context lines */
+.d2h-cntx {
+  @apply bg-white hover:bg-gray-50 transition-colors;
+}
+
+/* File list */
+.d2h-file-list-wrapper {
+  @apply bg-gray-50 rounded-lg p-4 mb-6 border border-gray-200;
+}
+
+.d2h-file-list-title {
+  @apply text-lg font-semibold text-gray-800 mb-3;
+}
+
+.d2h-file-list {
+  @apply space-y-1;
+}
+
+.d2h-file-list-line {
+  @apply text-sm;
+}
+
+.d2h-file-list-line a {
+  @apply text-gray-700 hover:text-emerald-600 transition-colors;
+}
+
+/* File stats */
+.d2h-file-stats {
+  @apply flex items-center gap-3 text-xs;
+}
+
+.d2h-lines-added {
+  @apply text-emerald-600 font-medium;
+}
+
+.d2h-lines-deleted {
+  @apply text-red-600 font-medium;
+}
+
+/* Empty diff */
+.d2h-empty-diff {
+  @apply text-gray-500 text-center py-8;
+}
+
+/* Info lines */
+.d2h-info {
+  @apply bg-blue-50 text-blue-800 px-4 py-2 text-sm;
+}
+
+/* File collapse/expand */
+.d2h-file-collapse {
+  @apply text-gray-500 hover:text-gray-700 transition-colors;
+}
+
+/* Improved scrolling */
+.d2h-wrapper {
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+/* Smooth scrolling */
+.d2h-wrapper {
+  scroll-behavior: smooth;
+}
+
+/* Better code highlighting */
+.d2h-code-line-ctn {
+  tab-size: 4;
+}
+
+/* File moved/renamed */
+.d2h-moved-tag {
+  @apply bg-blue-100 text-blue-700 px-2 py-0.5 rounded text-xs font-medium ml-2;
+}
+
+/* Hide default file icons */
+.d2h-file-name-wrapper svg {
+  display: none;
+}
+
+/* Add custom file type indicators */
+.d2h-file-name::before {
+  content: "📄";
+  @apply mr-2;
+}
+
+.d2h-file-name[href*=".cr"]::before {
+  content: "💎";
+}
+
+.d2h-file-name[href*=".yml"]::before,
+.d2h-file-name[href*=".yaml"]::before {
+  content: "⚙️";
+}
+
+.d2h-file-name[href*=".json"]::before {
+  content: "📋";
+}
+
+.d2h-file-name[href*=".md"]::before {
+  content: "📝";
+}
+
+/* Responsive improvements */
+@media (max-width: 768px) {
+  .d2h-code-linenumber {
+    min-width: 40px;
+    @apply px-1;
+  }
+  
+  .d2h-file-header {
+    @apply px-3 py-2;
+  }
+}
+
+/* Mobile-specific improvements */
+@media (max-width: 640px) {
+  /* Smaller font size for better mobile fit */
+  .d2h-wrapper {
+    @apply text-xs;
+  }
+  
+  /* Better code line wrapping */
+  .d2h-code-line-ctn {
+    word-break: break-word;
+    overflow-wrap: break-word;
+  }
+  
+  /* Horizontal scroll for wide diffs */
+  .d2h-file-wrapper,
+  .d2h-diff-table {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  /* Reduce line number width on mobile */
+  .d2h-code-linenumber {
+    min-width: 35px;
+    @apply text-xs px-1;
+  }
+  
+  /* Side-by-side view should switch to unified on mobile */
+  .d2h-file-side-diff {
+    display: block !important;
+  }
+  
+  .d2h-code-side-line {
+    max-width: 100% !important;
+    width: 100% !important;
+  }
+}
+
+/* Additional enhancements for better UX */
+
+/* File count badge */
+.d2h-files-counter {
+  @apply bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded-full text-xs font-medium;
+}
+
+/* Improved file headers with icons */
+.d2h-file-header {
+  position: relative;
+  overflow: hidden;
+}
+
+.d2h-file-header::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  @apply bg-emerald-500;
+}
+
+/* Syntax highlighting improvements */
+.hljs-keyword {
+  @apply text-purple-600 font-medium;
+}
+
+.hljs-string {
+  @apply text-emerald-700;
+}
+
+.hljs-comment {
+  @apply text-gray-500 italic;
+}
+
+.hljs-function {
+  @apply text-blue-600;
+}
+
+/* Loading state */
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.d2h-wrapper:empty::before {
+  content: 'Loading diff...';
+  @apply text-gray-500 text-center block py-8;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+/* Side-by-side view improvements */
+.d2h-code-side-linenumber {
+  @apply text-xs;
+}
+
+.d2h-code-side-line {
+  max-width: 50%;
+}
+
+/* Better contrast for line highlights */
+.d2h-code-line:hover {
+  @apply bg-gray-50;
+}
+
+.d2h-ins .d2h-code-line:hover {
+  @apply bg-emerald-100;
+}
+
+.d2h-del .d2h-code-line:hover {
+  @apply bg-red-100;
+}
+
+/* Collapsed file indicator */
+.d2h-file-collapsed .d2h-file-header {
+  @apply opacity-75;
+}
+
+/* Better word diff highlighting */
+.d2h-change-tag {
+  @apply font-semibold;
+}
+
+.d2h-ins .d2h-change-tag {
+  @apply bg-emerald-200 text-emerald-900 px-0.5 rounded;
+}
+
+.d2h-del .d2h-change-tag {
+  @apply bg-red-200 text-red-900 px-0.5 rounded;
+}
