@@ -78,9 +78,19 @@ export default class extends Controller {
     }
   }
   
-  updateHeader(viewMode: string): void {
-    // Header stays the same for all view modes
-    // No need to show/hide anything
+  updateHeader(viewMode: string, count?: number): void {
+    if (!this.hasFilesChangedTitleTarget) {
+      return;
+    }
+    
+    if (viewMode === "commits") {
+      const commitsCount = count !== undefined ? count : "...";
+      this.filesChangedTitleTarget.textContent = `Commits (${commitsCount})`;
+    } else {
+      // For other view modes, calculate file count from diff
+      const fileCount = this.unifiedDiff.match(/^diff --color=never/gm)?.length || 0;
+      this.filesChangedTitleTarget.textContent = `Files changed (${fileCount})`;
+    }
   }
 
   renderRawDiff(targetElement: HTMLElement): void {
@@ -177,6 +187,9 @@ export default class extends Controller {
     const from = urlParams.get('from') || '1.3.0';
     const to = urlParams.get('to') || '1.4.0';
     
+    // Update header to show "Commits (...)" while loading
+    this.updateHeader("commits");
+    
     // Show loading state
     targetElement.innerHTML = '<div class="text-center py-8 text-gray-500">Loading commits...</div>';
     
@@ -201,6 +214,9 @@ export default class extends Controller {
         return; // View has changed, don't update
       }
       
+      // Update header with commit count
+      this.updateHeader("commits", data.total_commits);
+      
       // Render commits inline
       targetElement.innerHTML = this.renderCommitsHTML(data, from, to);
       
@@ -211,7 +227,7 @@ export default class extends Controller {
           e.preventDefault();
           if (this.hasViewModeTarget) {
             this.viewModeTarget.value = 'unified';
-            this.render();
+            this.viewModeChanged();
           }
         });
       }
