@@ -1,0 +1,14 @@
+{
+  "license": "UNLICENSED",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@rails/ujs": "^7.1.0",
+    "modern-normalize": "^3.0.1"
+  },
+  "scripts": {
+    "build": "bun lib/lucky/src/bun/bake.js",
+    "dev": "bun run build --dev",
+    "prod": "bun run build --prod"
+  }
+}

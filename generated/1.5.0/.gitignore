@@ -1,0 +1,14 @@
+/docs/
+/lib/
+/bin/
+/.shards/
+*.dwarf
+*.local.cr
+.env
+/tmp
+/public/js
+/public/css
+/public/assets
+/public/*manifest*.json
+/node_modules
+yarn-error.log
