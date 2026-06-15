@@ -1,7 +1,7 @@
 require "./shards"
 
 # Load the asset manifest
-Lucky::AssetHelpers.load_manifest "public/manifest.json"
+Lucky::AssetHelpers.load_manifest "public/manifest.json", from: :mix
 
 require "../config/server"
 require "../config/**"

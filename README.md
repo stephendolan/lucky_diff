@@ -7,7 +7,7 @@ This project compares released versions of [Lucky](https://luckyframework.org) a
 
 ## Requirements
 
-- Crystal 1.16.3 or higher
+- Crystal 1.19.1 or higher
 
 ## Is a version you need missing?
 

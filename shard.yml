@@ -8,15 +8,15 @@ targets:
   webserver:
     main: src/lucky_diff.cr
 
-crystal: ">= 1.16.0"
+crystal: ">= 1.19.1"
 
 dependencies:
   lucky:
     github: luckyframework/lucky
-    version: ~> 1.4.0
+    version: ~> 1.5.0
   avram:
     github: luckyframework/avram
-    version: ~> 1.4.0
+    version: ~> 1.5.0
   lucky_env:
     github: luckyframework/lucky_env
     version: ~> 0.3.0
@@ -33,4 +33,4 @@ development_dependencies:
     branch: master
   lucky_flow:
     github: luckyframework/lucky_flow
-    version: ~> 0.10.0
+    version: ~> 0.10.2

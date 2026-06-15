@@ -184,8 +184,8 @@ export default class extends Controller {
   async renderCommits(targetElement: HTMLElement): Promise<void> {
     // Extract from and to versions from the URL
     const urlParams = new URLSearchParams(window.location.search);
-    const from = urlParams.get('from') || '1.3.0';
-    const to = urlParams.get('to') || '1.4.0';
+    const from = urlParams.get('from') || '1.4.1';
+    const to = urlParams.get('to') || '1.5.0';
     
     // Update header to show "Commits (...)" while loading
     this.updateHeader("commits");

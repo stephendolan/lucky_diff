@@ -8,8 +8,8 @@ LuckyDiff is a Crystal/Lucky Framework application that compares different versi
 
 ## Requirements
 
-- **Crystal**: 1.16.3 or higher (via asdf or similar)
-- **Lucky Framework**: 1.4.0
+- **Crystal**: 1.19.1 or higher (via asdf, mise, or similar)
+- **Lucky Framework**: 1.5.0
 - **Browser**: Chrome, Chromium, or Firefox (only needed for flow tests)
 
 ## Development Commands
@@ -17,7 +17,7 @@ LuckyDiff is a Crystal/Lucky Framework application that compares different versi
 ### Setup
 ```bash
 ./script/setup  # Install dependencies and prepare the project
-asdf install crystal 1.16.3  # If using asdf for Crystal version management
+asdf install crystal 1.19.1  # If using asdf for Crystal version management
 ```
 
 ### Running the Application
@@ -48,7 +48,7 @@ rm -rf ~/.webdrivers/  # Force LuckyFlow to download correct version
 
 ### Linting
 ```bash
-bin/ameba  # Crystal linter (using master branch for Crystal 1.16.3 compatibility)
+bin/ameba  # Crystal linter
 bin/ameba --fix  # Auto-fix correctable issues
 ```
 
@@ -88,11 +88,12 @@ bin/ameba --fix  # Auto-fix correctable issues
 - Version validation ensures only existing versions can be compared
 - GitHub API integration fetches commit information between version tags
 
-## Upgrade Notes (Lucky 1.4.0 / Crystal 1.16.3)
+## Upgrade Notes (Lucky 1.5.0 / Crystal 1.19.1)
 
 ### Dependencies
 - Use `lucky_env: ~> 0.3.0` (not 0.2.0)
-- Ameba 1.6.x has issues with Crystal 1.16.3 - use master branch: `github: crystal-ameba/ameba, branch: master`
+- Lucky 1.5.0 requires Crystal 1.16 or newer; this project tracks the generated app's Crystal 1.19.1 baseline.
+- The app keeps its existing esbuild/Tailwind asset scripts instead of adopting Lucky's generated Bun asset wrapper, because LuckyDiff already has a custom TypeScript/Stimulus pipeline.
 - LuckyFlow automatically manages chromedriver downloads - no need to install manually
 
 ### Breaking Changes Fixed
